@@ -1,16 +1,21 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  KeyboardAvoidingView,
+} from 'react-native';
 import MyInput from '../components/MyInput';
 import MyButton from '../components/MyButton';
 import Icon from 'react-native-vector-icons/Entypo';
 import MyBackground from '../components/MyBackground';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const RegisterScreen = () => {
   const [isSecure, setIsSecure] = useState(true);
   return (
-    <View style={styles.container}>
-      <KeyboardAwareScrollView style={{flexGrow: 1}}>
+    <KeyboardAvoidingView style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false} style={{flexGrow: 1}}>
         <MyBackground />
         <View style={styles.sectionForm}>
           <Text style={styles.title}>Register</Text>
@@ -37,6 +42,21 @@ const RegisterScreen = () => {
             textLabel={'Password'}
             placeholder={'Please enter your password'}
           />
+          <MyInput
+            iconPosition={'right'}
+            icon={
+              <Icon
+                onPress={() => setIsSecure(!isSecure)}
+                name={isSecure ? 'eye-with-line' : 'eye'}
+                size={25}
+                color={'#333'}
+              />
+            }
+            secureTextEntry={isSecure}
+            style={styles.input}
+            textLabel={'Confirm password'}
+            placeholder={'Please enter confirm password'}
+          />
           <Text style={{marginTop: 20}}>
             By continuing you agree to our{' '}
             <Text style={{color: '#53B175'}}>Terms of Service</Text> {'\n'}and{' '}
@@ -48,8 +68,8 @@ const RegisterScreen = () => {
             title={'Register'}
           />
         </View>
-      </KeyboardAwareScrollView>
-    </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 const styles = StyleSheet.create({

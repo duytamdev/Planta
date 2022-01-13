@@ -25,7 +25,7 @@ const MyInput = ({textLabel, style, icon, iconPosition, ...propsInput}) => {
 
         <TextInput {...propsInput} style={styles.textInput} />
       </View>
-      <Line />
+      <Line style={{backgroundColor: '#888'}} />
     </View>
   );
 };

@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Text, StyleSheet, TouchableOpacity, View} from 'react-native';
 
 const MyButton = ({
   title,
