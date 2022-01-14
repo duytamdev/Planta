@@ -11,7 +11,10 @@ import {
 import {ColorsGlobal} from '../assets/ColorsGlobal';
 import Line from '../components/Line';
 
-const AccountScreen = () => {
+const AccountScreen = ({navigation}) => {
+  const handleUpdateInfo = () => {
+    navigation.navigate('UpdateInfo');
+  };
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -32,7 +35,7 @@ const AccountScreen = () => {
           <View>
             <Text style={styles.textSectionHeader}>Chung</Text>
             <Line style={styles.line} />
-            <TouchableOpacity style={styles.section}>
+            <TouchableOpacity onPress={handleUpdateInfo} style={styles.section}>
               <Text style={styles.text}>Chỉnh sửa thông tin</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.section}>

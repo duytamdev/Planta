@@ -2,7 +2,14 @@ import React from 'react';
 import {View, Text, StyleSheet, TextInput} from 'react-native';
 import Line from './Line';
 
-const MyInput = ({textLabel, style, icon, iconPosition, ...propsInput}) => {
+const MyInput = ({
+  textLabel,
+  style,
+  icon,
+  iconPosition,
+  styleLine,
+  ...propsInput
+}) => {
   const getFlexDirection = () => {
     if (icon && iconPosition) {
       if (iconPosition === 'left') {
@@ -25,7 +32,7 @@ const MyInput = ({textLabel, style, icon, iconPosition, ...propsInput}) => {
 
         <TextInput {...propsInput} style={styles.textInput} />
       </View>
-      <Line style={{backgroundColor: '#888'}} />
+      <Line style={[{backgroundColor: '#888'}, styleLine]} />
     </View>
   );
 };
