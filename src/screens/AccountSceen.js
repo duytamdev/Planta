@@ -17,9 +17,6 @@ const AccountScreen = ({navigation}) => {
   };
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.textHeader}>PROFILE</Text>
-      </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <TouchableOpacity style={styles.sectionProfileContainer}>
           <Image
@@ -70,15 +67,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-  },
-  header: {
-    alignItems: 'center',
-  },
-  textHeader: {
-    fontWeight: '500',
-    fontSize: 16,
-    color: '#000',
-    padding: 17.5,
   },
   sectionProfileContainer: {
     marginTop: 15,

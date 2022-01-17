@@ -13,7 +13,7 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 import {ColorsGlobal} from '../assets/ColorsGlobal';
 import ProductItem from '../components/ProductItem';
 import CompoItem from '../components/CompoItem';
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   const [trees, setTrees] = useState([
     {
       name: 'Spider paint',
@@ -52,13 +52,16 @@ const HomeScreen = () => {
       image: require('../assets/images/tree.png'),
     },
   ]);
+  const handleToCart = () => {
+    navigation.navigate('Cart');
+  };
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
       <View style={styles.sectionHeader}>
         <Text style={styles.textHeader}>
           Planta - toả sáng {'\n'}không gian nhà bạn
         </Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleToCart}>
           <FeatherIcon name={'shopping-cart'} size={25} color={'#000'} />
         </TouchableOpacity>
       </View>

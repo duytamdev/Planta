@@ -6,6 +6,7 @@ import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import BottomNavigation from './BottomNavigation';
 import UpdateInfo from '../screens/UpdateInfo';
+import CartScreen from '../screens/CartScreen';
 
 const Stack = createNativeStackNavigator();
 const MainNavigations = () => {
@@ -28,6 +29,16 @@ const MainNavigations = () => {
           }}
           name={'UpdateInfo'}
           component={UpdateInfo}
+        />
+        <Stack.Screen
+          name={'Cart'}
+          component={CartScreen}
+          options={{
+            title: 'GIỎ HÀNG',
+            headerShown: true,
+            headerTitleAlign: 'center',
+            headerShadowVisible: false,
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>

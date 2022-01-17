@@ -40,11 +40,37 @@ const BottomNavigation = () => {
         },
       })}>
       <Tab.Screen name={'Home'} component={HomeScreen} />
-      <Tab.Screen name={'Search'} component={SearchScreen} />
-      <Tab.Screen name={'Notification'} component={NotificationScreen} />
-      <Tab.Screen name={'Account'} component={AccountScreen} />
+      <Tab.Screen
+        name={'Search'}
+        options={{
+          title: 'TÌM KIẾM',
+          headerShown: true,
+          headerTitleAlign: 'center',
+          headerShadowVisible: false,
+        }}
+        component={SearchScreen}
+      />
+      <Tab.Screen
+        name={'Notification'}
+        options={{
+          title: 'THÔNG BÁO',
+          headerShown: true,
+          headerTitleAlign: 'center',
+          headerShadowVisible: false,
+        }}
+        component={NotificationScreen}
+      />
+      <Tab.Screen
+        name={'Account'}
+        options={{
+          title: 'PROFILE',
+          headerShown: true,
+          headerTitleAlign: 'center',
+          headerShadowVisible: false,
+        }}
+        component={AccountScreen}
+      />
     </Tab.Navigator>
   );
 };
-
 export default BottomNavigation;
