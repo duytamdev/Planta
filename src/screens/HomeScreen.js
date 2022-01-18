@@ -56,7 +56,7 @@ const HomeScreen = ({navigation}) => {
     navigation.navigate('Cart');
   };
   return (
-    <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
+    <ScrollView nestedScrollEnabled={true} showsVerticalScrollIndicator={false} style={styles.container}>
       <View style={styles.sectionHeader}>
         <Text style={styles.textHeader}>
           Planta - toả sáng {'\n'}không gian nhà bạn

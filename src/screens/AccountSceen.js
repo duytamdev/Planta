@@ -25,7 +25,7 @@ const AccountScreen = ({navigation}) => {
           />
           <View styles={styles.sectionProfile}>
             <Text style={styles.text}>NGUYỄN DUY TÂM</Text>
-            <Text style={styles.textEmail}>tamnguyenduy0819@gmail.com</Text>
+            <Text style={styles.textEmail}>tamduynguyen0819@gmail.com</Text>
           </View>
         </TouchableOpacity>
         <View style={styles.sectionContainer}>

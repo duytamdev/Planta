@@ -6,13 +6,14 @@ import SearchScreen from '../screens/SearchScreen';
 import NotificationScreen from '../screens/NotificationScreen';
 import AccountScreen from '../screens/AccountSceen';
 import FeatherIcon from 'react-native-vector-icons/Feather';
+import EntypoIcon from 'react-native-vector-icons/Entypo';
+import {View} from 'react-native';
 const Tab = createBottomTabNavigator();
 const BottomNavigation = () => {
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
         headerShown: false,
-        tabBarShowLabel: false,
         // tabBarActiveTintColor: '#009245',
         // tabBarInactiveTintColor: '#000',
         tabBarIcon: ({focused, size}) => {
@@ -37,6 +38,13 @@ const BottomNavigation = () => {
               color={focused ? '#009245' : '#000'}
             />
           );
+        },
+        tabBarLabel: ({focused}) => {
+          return focused ? (
+            <View style={{marginTop: -8}}>
+              <EntypoIcon name="dot-single" color={'#009245'} />
+            </View>
+          ) : null;
         },
       })}>
       <Tab.Screen name={'Home'} component={HomeScreen} />
