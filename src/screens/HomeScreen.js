@@ -14,47 +14,57 @@ import {ColorsGlobal} from '../assets/ColorsGlobal';
 import CompoItem from '../components/CompoItem';
 import {productForHome} from '../api/PlantaAPI';
 import ListProduct from '../components/ListProduct';
+
 const HomeScreen = ({navigation}) => {
+  const SectionHeader = () => {
+    return (
+      <View>
+        <View style={styles.sectionHeader}>
+          <Text style={styles.textHeader}>
+            Planta - toả sáng {'\n'}không gian nhà bạn
+          </Text>
+          <TouchableOpacity onPress={handleToCart}>
+            <FeatherIcon name={'shopping-cart'} size={25} color={'#000'} />
+          </TouchableOpacity>
+        </View>
+        <ImageBackground
+          style={styles.imageBackground}
+          source={require('../assets/images/slider.png')}>
+          <TouchableOpacity style={styles.sectionLogoContainer}>
+            <Text style={styles.textSub}>Xem hàng mới về</Text>
+            <FeatherIcon
+              name={'arrow-right'}
+              size={24}
+              color={ColorsGlobal.main}
+            />
+          </TouchableOpacity>
+        </ImageBackground>
+      </View>
+    );
+  };
+  const SectionFooter = () => {
+    return (
+      <View style={[styles.sectionCompo, styles.paddingContainer]}>
+        <Text style={styles.textHeader}> Combo chăm sóc (mới)</Text>
+        <CompoItem />
+      </View>
+    );
+  };
   const [data, setData] = useState(productForHome.data);
   const handleToCart = () => {
     navigation.navigate('Cart');
   };
   return (
-    <ScrollView
-      nestedScrollEnabled={true}
-      showsVerticalScrollIndicator={false}
-      style={styles.container}>
-      <View style={styles.sectionHeader}>
-        <Text style={styles.textHeader}>
-          Planta - toả sáng {'\n'}không gian nhà bạn
-        </Text>
-        <TouchableOpacity onPress={handleToCart}>
-          <FeatherIcon name={'shopping-cart'} size={25} color={'#000'} />
-        </TouchableOpacity>
-      </View>
-      <ImageBackground
-        style={styles.imageBackground}
-        source={require('../assets/images/slider.png')}>
-        <TouchableOpacity style={styles.sectionLogoContainer}>
-          <Text style={styles.textSub}>Xem hàng mới về</Text>
-          <FeatherIcon
-            name={'arrow-right'}
-            size={24}
-            color={ColorsGlobal.main}
-          />
-        </TouchableOpacity>
-      </ImageBackground>
+    <View style={styles.container}>
       <FlatList
+        ListHeaderComponent={SectionHeader}
+        ListFooterComponent={SectionFooter}
         data={data}
         renderItem={({item, index}) => {
           return <ListProduct products={item.products} name={item.name} />;
         }}
       />
-      <View style={[styles.sectionCompo, styles.paddingContainer]}>
-        <Text style={styles.textHeader}> Combo chăm sóc (mới)</Text>
-        <CompoItem />
-      </View>
-    </ScrollView>
+    </View>
   );
 };
 const styles = StyleSheet.create({
