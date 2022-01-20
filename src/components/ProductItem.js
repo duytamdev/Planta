@@ -1,17 +1,19 @@
 import React from 'react';
 
-import {Text, View, StyleSheet, Image, Dimensions} from 'react-native';
+import {Text, View, StyleSheet, Image, Dimensions, TouchableOpacity} from 'react-native';
 import {ColorsGlobal} from '../assets/ColorsGlobal';
 const WIDTH = Dimensions.get('screen').width;
 
-const ProductItem = ({image, name, description, price, style}) => {
+const ProductItem = ({image, name, madein, price, style}) => {
   return (
-    <View style={[styles.container, styles]}>
-      <Image styles={styles.image} source={image} />
-      <Text style={styles.name}>{name}</Text>
-      <Text>{description}</Text>
-      <Text style={styles.price}>{price}</Text>
-    </View>
+    <TouchableOpacity style={[styles.container, style]}>
+      <Image source={image} style={styles.image} />
+      <Text numberOfLines={2} ellipsizeMode={'tail'} style={styles.name}>
+        {name}
+      </Text>
+      <Text>{madein}</Text>
+      <Text style={styles.price}>{price} vnd</Text>
+    </TouchableOpacity>
   );
 };
 const styles = StyleSheet.create({
@@ -27,11 +29,11 @@ const styles = StyleSheet.create({
   },
   container: {
     backgroundColor: '#fff',
-    maxWidth: WIDTH / 2 - 30,
-      margin: 15,
+    margin: 15,
   },
   image: {
-    width: '100%',
+    width: 155,
+    height: 134,
   },
 });
 export default ProductItem;

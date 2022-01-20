@@ -2,16 +2,20 @@ import React from 'react';
 
 import {Text, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 
-const ProductItemInSearch = ({style,name,price,description,quantity,image}) => {
+const ProductItemInSearch = ({
+  style,
+  name,
+  price,
+  description,
+  quantity,
+  image,
+}) => {
   return (
     <TouchableOpacity style={[styles.container, style]}>
-      <Image
-        style={styles.image}
-        source={image}
-      />
+      <Image style={styles.image} source={image} />
       <View style={styles.content}>
         <View style={styles.containerName}>
-          <Text style={styles.text}>{name}</Text>
+          <Text numberOfLines={1} ellipsizeMode={'tail'} style={[styles.text,{maxWidth: 200}]}>{name}</Text>
           <Text style={styles.text}> | {description}</Text>
         </View>
         <Text style={styles.text}>{`${price} đ`}</Text>
@@ -23,11 +27,12 @@ const ProductItemInSearch = ({style,name,price,description,quantity,image}) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    paddingStart: 15,
     alignContent: 'center',
     padding: 8,
   },
   image: {
+    width: 77,
+    height: 77,
     borderRadius: 8,
     maxWidth: 77,
     maxHeight: 77,
@@ -44,6 +49,7 @@ const styles = StyleSheet.create({
   },
   containerName: {
     flexDirection: 'row',
+    maxWidth: 250,
   },
 });
 export default ProductItemInSearch;

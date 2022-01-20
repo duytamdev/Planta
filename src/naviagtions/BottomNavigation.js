@@ -1,14 +1,16 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';
 import SearchScreen from '../screens/SearchScreen';
 import NotificationScreen from '../screens/NotificationScreen';
 import AccountScreen from '../screens/AccountSceen';
-import FeatherIcon from 'react-native-vector-icons/Feather';
-import EntypoIcon from 'react-native-vector-icons/Entypo';
-import {View} from 'react-native';
+import * as Animatable from 'react-native-animatable';
+import {TouchableOpacity, View, StyleSheet} from 'react-native';
+import Icon, {Icons} from '../components/Icons';
 const Tab = createBottomTabNavigator();
+
+
 const BottomNavigation = () => {
   return (
     <Tab.Navigator
@@ -32,7 +34,8 @@ const BottomNavigation = () => {
             size = focused ? 25 : 20;
           }
           return (
-            <FeatherIcon
+            <Icon
+              type={Icons.Feather}
               name={iconName}
               size={size}
               color={focused ? '#009245' : '#000'}
@@ -42,9 +45,17 @@ const BottomNavigation = () => {
         tabBarLabel: ({focused}) => {
           return focused ? (
             <View style={{marginTop: -8}}>
-              <EntypoIcon name="dot-single" color={'#009245'} />
+              <Icon type={Icons.Entypo} name="dot-single" color={'#009245'} />
             </View>
           ) : null;
+        },
+        tabBarStyle: {
+          height: 60,
+          position: 'absolute',
+          bottom: 16,
+          right: 16,
+          left: 16,
+          borderRadius: 16,
         },
       })}>
       <Tab.Screen name={'Home'} component={HomeScreen} />
@@ -81,4 +92,11 @@ const BottomNavigation = () => {
     </Tab.Navigator>
   );
 };
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 export default BottomNavigation;

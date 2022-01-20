@@ -3,45 +3,10 @@ import React, {useState} from 'react';
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import ProductItemInSearch from '../components/ProductItemInSearch';
 import SearchBar from '../components/SearchBar';
+import {productForHome} from '../api/PlantaAPI';
 
 const SearchScreen = () => {
-  const [products, setProducts] = useState([
-    {
-      image: require('../assets/images/grow-kit-main_540x.png'),
-      name: 'Panse Đen',
-      description: 'Hybrid',
-      price: 50000,
-      quantity: 25,
-    },
-    {
-      image: require('../assets/images/grow-kit-main_540x.png'),
-      name: 'Panse Tím',
-      description: 'Hybrid',
-      price: 70000,
-      quantity: 35,
-    },
-    {
-      image: require('../assets/images/grow-kit-main_540x.png'),
-      name: 'Panse Vàng',
-      description: 'Hybrid',
-      price: 40000,
-      quantity: 25,
-    },
-    {
-      image: require('../assets/images/grow-kit-main_540x.png'),
-      name: 'Panse Xanh',
-      description: 'Hybrid',
-      price: 30000,
-      quantity: 25,
-    },
-    {
-      image: require('../assets/images/grow-kit-main_540x.png'),
-      name: 'Panse Đỏ',
-      description: 'Hybrid',
-      price: 80000,
-      quantity: 25,
-    },
-  ]);
+  const [products, setProducts] = useState(productForHome.data[0].products);
   const [productsFilter, setProductsFilter] = useState(products);
 
   const [textSearch, setTextSearch] = useState('');
@@ -78,8 +43,8 @@ const SearchScreen = () => {
               name={item.name}
               price={item.price}
               quantity={item.quantity}
-              description={item.description}
-              image={item.image}
+              description={item.madein}
+              image={{uri: item.images[0]}}
             />
           );
         }}

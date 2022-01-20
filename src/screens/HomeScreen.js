@@ -11,52 +11,19 @@ import {
 } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import {ColorsGlobal} from '../assets/ColorsGlobal';
-import ProductItem from '../components/ProductItem';
 import CompoItem from '../components/CompoItem';
+import {productForHome} from '../api/PlantaAPI';
+import ListProduct from '../components/ListProduct';
 const HomeScreen = ({navigation}) => {
-  const [trees, setTrees] = useState([
-    {
-      name: 'Spider paint',
-      description: 'Ua Bong',
-      price: 25000,
-      image: require('../assets/images/tree.png'),
-    },
-    {
-      name: 'Planta While',
-      description: 'Ua Sang',
-      price: 28000,
-      image: require('../assets/images/tree.png'),
-    },
-    {
-      name: 'Spider paint',
-      description: 'Ua Bong',
-      price: 25000,
-      image: require('../assets/images/tree.png'),
-    },
-    {
-      name: 'Spider paint',
-      description: 'Ua Bong',
-      price: 25000,
-      image: require('../assets/images/tree.png'),
-    },
-    {
-      name: 'Spider paint',
-      description: 'Ua Bong',
-      price: 25000,
-      image: require('../assets/images/tree.png'),
-    },
-    {
-      name: 'Planta While',
-      description: 'Ua Sang',
-      price: 28000,
-      image: require('../assets/images/tree.png'),
-    },
-  ]);
+  const [data, setData] = useState(productForHome.data);
   const handleToCart = () => {
     navigation.navigate('Cart');
   };
   return (
-    <ScrollView nestedScrollEnabled={true} showsVerticalScrollIndicator={false} style={styles.container}>
+    <ScrollView
+      nestedScrollEnabled={true}
+      showsVerticalScrollIndicator={false}
+      style={styles.container}>
       <View style={styles.sectionHeader}>
         <Text style={styles.textHeader}>
           Planta - toả sáng {'\n'}không gian nhà bạn
@@ -77,52 +44,12 @@ const HomeScreen = ({navigation}) => {
           />
         </TouchableOpacity>
       </ImageBackground>
-      <View style={[styles.paddingContainer, styles.sectionTreesContainer]}>
-        <Text style={styles.textHeader}>Cây Trồng</Text>
-        <FlatList
-          scrollEnabled={false}
-          showsVerticalScrollIndicator={false}
-          horizontal={false}
-          numColumns={2}
-          keyExtractor={(item, index) => index.toString()}
-          data={trees}
-          renderItem={({item}) => {
-            return (
-              <TouchableOpacity>
-                <ProductItem
-                  name={item.name}
-                  image={item.image}
-                  description={item.description}
-                  price={item.price}
-                />
-              </TouchableOpacity>
-            );
-          }}
-        />
-      </View>
-      <View style={[styles.paddingContainer, styles.sectionTreesContainer]}>
-        <Text style={styles.textHeader}>Chậu Cây Trồng</Text>
-        <FlatList
-          scrollEnabled={false}
-          showsVerticalScrollIndicator={false}
-          horizontal={false}
-          numColumns={2}
-          keyExtractor={(item, index) => index.toString()}
-          data={trees}
-          renderItem={({item}) => {
-            return (
-              <TouchableOpacity>
-                <ProductItem
-                  name={item.name}
-                  image={item.image}
-                  description={item.description}
-                  price={item.price}
-                />
-              </TouchableOpacity>
-            );
-          }}
-        />
-      </View>
+      <FlatList
+        data={data}
+        renderItem={({item, index}) => {
+          return <ListProduct products={item.products} name={item.name} />;
+        }}
+      />
       <View style={[styles.sectionCompo, styles.paddingContainer]}>
         <Text style={styles.textHeader}> Combo chăm sóc (mới)</Text>
         <CompoItem />
