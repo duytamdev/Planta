@@ -57,6 +57,7 @@ const HomeScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <FlatList
+        keyExtractor={item => item._id}
         ListHeaderComponent={SectionHeader}
         ListFooterComponent={SectionFooter}
         data={data}

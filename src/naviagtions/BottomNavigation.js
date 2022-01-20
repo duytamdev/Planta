@@ -6,16 +6,48 @@ import SearchScreen from '../screens/SearchScreen';
 import NotificationScreen from '../screens/NotificationScreen';
 import AccountScreen from '../screens/AccountSceen';
 import * as Animatable from 'react-native-animatable';
-import {TouchableOpacity, View, StyleSheet} from 'react-native';
+import {TouchableOpacity, StyleSheet} from 'react-native';
 import Icon, {Icons} from '../components/Icons';
-const Tab = createBottomTabNavigator();
 
+const TabButton = props => {
+  const {children, onPress, accessibilityState} = props;
+  const focused = accessibilityState.selected;
+  const viewRef = useRef(null);
+
+  useEffect(() => {
+    if (focused) {
+      viewRef.current.animate({
+        0: {scale: 0.5, rotate: '0deg'},
+        1: {scale: 1.5, rotate: '360deg'},
+      });
+    } else {
+      viewRef.current.animate({
+        0: {scale: 1.5, rotate: '360deg'},
+        1: {scale: 1, rotate: '0deg'},
+      });
+    }
+  }, [focused]);
+
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      activeOpacity={1}
+      style={styles.container}>
+      <Animatable.View ref={viewRef} duration={1000} style={styles.container}>
+        {children}
+      </Animatable.View>
+    </TouchableOpacity>
+  );
+};
+
+const Tab = createBottomTabNavigator();
 
 const BottomNavigation = () => {
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
         headerShown: false,
+        tabBarShowLabel: false,
         // tabBarActiveTintColor: '#009245',
         // tabBarInactiveTintColor: '#000',
         tabBarIcon: ({focused, size}) => {
@@ -42,13 +74,7 @@ const BottomNavigation = () => {
             />
           );
         },
-        tabBarLabel: ({focused}) => {
-          return focused ? (
-            <View style={{marginTop: -8}}>
-              <Icon type={Icons.Entypo} name="dot-single" color={'#009245'} />
-            </View>
-          ) : null;
-        },
+        tabBarButton: props => <TabButton {...props} />,
         tabBarStyle: {
           height: 60,
           position: 'absolute',
@@ -89,6 +115,22 @@ const BottomNavigation = () => {
         }}
         component={AccountScreen}
       />
+      {/*{TabArr.map((item, index) => {*/}
+      {/*  return (*/}
+      {/*    <Tab.Screen*/}
+      {/*      key={index}*/}
+      {/*      name={item.route}*/}
+      {/*      component={item.component}*/}
+      {/*      options={{*/}
+      {/*        tabBarButton: props => (*/}
+      {/*          <TabButton {...props} item={item}>*/}
+      {/*            <Text>hi</Text>*/}
+      {/*          </TabButton>*/}
+      {/*        ),*/}
+      {/*      }}*/}
+      {/*    />*/}
+      {/*  );*/}
+      {/*})}*/}
     </Tab.Navigator>
   );
 };

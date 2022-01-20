@@ -12,6 +12,7 @@ const ListProduct = ({name, products}) => {
           products.map(product => {
             return (
               <ProductItem
+                key={product._id}
                 style={styles.product}
                 madein={product.madein}
                 name={product.name}
