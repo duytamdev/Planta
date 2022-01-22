@@ -1,9 +1,15 @@
 import React from 'react';
 
-import {Text, View, StyleSheet, Dimensions} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
 import ProductItem from './ProductItem';
 
-const ListProduct = ({name, products}) => {
+const ListProduct = ({name, products, navigation}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.textHeader}>{name}</Text>
@@ -11,14 +17,17 @@ const ListProduct = ({name, products}) => {
         {products &&
           products.map(product => {
             return (
-              <ProductItem
-                key={product._id}
-                style={styles.product}
-                madein={product.madein}
-                name={product.name}
-                price={product.price}
-                image={{uri: product.images[0]}}
-              />
+              <TouchableOpacity
+                onPress={() => navigation.navigate('DetailsProduct', {product: product})}>
+                <ProductItem
+                  key={product._id}
+                  style={styles.product}
+                  madein={product.madein}
+                  name={product.name}
+                  price={product.price}
+                  image={{uri: product.images[0]}}
+                />
+              </TouchableOpacity>
             );
           })}
       </View>

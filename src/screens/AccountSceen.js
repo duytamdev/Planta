@@ -7,6 +7,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Alert,
 } from 'react-native';
 import {ColorsGlobal} from '../assets/ColorsGlobal';
 import Line from '../components/Line';
@@ -14,6 +15,16 @@ import Line from '../components/Line';
 const AccountScreen = ({navigation}) => {
   const handleUpdateInfo = () => {
     navigation.navigate('UpdateInfo');
+  };
+  const handleLogout = () => {
+    Alert.alert('Xác Nhận Thoát', 'Bạn thật sự muốn đăng xuất', [
+      {
+        text: 'Huỷ',
+        onPress: null,
+        style: 'cancel',
+      },
+      {text: 'Đăng Xuất', onPress: () => navigation.replace('Login')},
+    ]);
   };
   return (
     <View style={styles.container}>
@@ -54,7 +65,7 @@ const AccountScreen = ({navigation}) => {
             <TouchableOpacity style={styles.section}>
               <Text style={styles.text}>Chính sách quyền riêng tư</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.section}>
+            <TouchableOpacity style={styles.section} onPress={handleLogout}>
               <Text style={[styles.text, styles.textLogout]}>Đăng Xuất</Text>
             </TouchableOpacity>
           </View>

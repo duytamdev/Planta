@@ -7,6 +7,7 @@ import RegisterScreen from '../screens/RegisterScreen';
 import BottomNavigation from './BottomNavigation';
 import UpdateInfo from '../screens/UpdateInfo';
 import CartScreen from '../screens/CartScreen';
+import DetailsProduct from '../screens/DetailsProduct';
 
 const Stack = createNativeStackNavigator();
 const MainNavigations = () => {
@@ -20,6 +21,7 @@ const MainNavigations = () => {
         <Stack.Screen name={'Login'} component={LoginScreen} />
         <Stack.Screen name={'Register'} component={RegisterScreen} />
         <Stack.Screen name={'BottomTabs'} component={BottomNavigation} />
+        <Stack.Screen name={'DetailsProduct'} component={DetailsProduct} />
         <Stack.Screen
           options={{
             title: 'Chỉnh sửa thông tin',

@@ -1,19 +1,26 @@
 import React from 'react';
 
-import {Text, View, StyleSheet, Image, Dimensions, TouchableOpacity} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
 import {ColorsGlobal} from '../assets/ColorsGlobal';
 const WIDTH = Dimensions.get('screen').width;
 
-const ProductItem = ({image, name, madein, price, style}) => {
+const ProductItem = ({image, name, madein, price, style, ...props}) => {
   return (
-    <TouchableOpacity style={[styles.container, style]}>
+    <View {...props} style={[styles.container, style]}>
       <Image source={image} style={styles.image} />
       <Text numberOfLines={2} ellipsizeMode={'tail'} style={styles.name}>
         {name}
       </Text>
       <Text>{madein}</Text>
       <Text style={styles.price}>{price} vnd</Text>
-    </TouchableOpacity>
+    </View>
   );
 };
 const styles = StyleSheet.create({

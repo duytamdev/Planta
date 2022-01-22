@@ -62,7 +62,14 @@ const HomeScreen = ({navigation}) => {
         ListFooterComponent={SectionFooter}
         data={data}
         renderItem={({item, index}) => {
-          return <ListProduct products={item.products} name={item.name} />;
+          return (
+            <ListProduct
+              key={index}
+              navigation={navigation}
+              products={item.products}
+              name={item.name}
+            />
+          );
         }}
       />
     </View>
