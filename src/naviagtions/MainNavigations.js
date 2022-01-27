@@ -8,8 +8,16 @@ import BottomNavigation from './BottomNavigation';
 import UpdateInfo from '../screens/UpdateInfo';
 import CartScreen from '../screens/CartScreen';
 import DetailsProduct from '../screens/DetailsProduct';
+import CartHistoryScreen from '../screens/CartHistoryScreen';
 
 const Stack = createNativeStackNavigator();
+const headerScreen = title => ({
+  title: title,
+  headerShown: true,
+  headerTitleAlign: 'center',
+  headerShadowVisible: false,
+});
+
 const MainNavigations = () => {
   return (
     <NavigationContainer>
@@ -23,24 +31,19 @@ const MainNavigations = () => {
         <Stack.Screen name={'BottomTabs'} component={BottomNavigation} />
         <Stack.Screen name={'DetailsProduct'} component={DetailsProduct} />
         <Stack.Screen
-          options={{
-            title: 'Chỉnh sửa thông tin',
-            headerShown: true,
-            headerTitleAlign: 'center',
-            headerShadowVisible: false,
-          }}
+          options={headerScreen('CHỈNH SỬA THÔNG TIN')}
           name={'UpdateInfo'}
           component={UpdateInfo}
         />
         <Stack.Screen
           name={'Cart'}
           component={CartScreen}
-          options={{
-            title: 'GIỎ HÀNG',
-            headerShown: true,
-            headerTitleAlign: 'center',
-            headerShadowVisible: false,
-          }}
+          options={headerScreen('GIỎ HÀNG')}
+        />
+        <Stack.Screen
+          name={'CartHistory'}
+          component={CartHistoryScreen}
+          options={headerScreen('LỊCH SỬ ĐƠN HÀNG')}
         />
       </Stack.Navigator>
     </NavigationContainer>

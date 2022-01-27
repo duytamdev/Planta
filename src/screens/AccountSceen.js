@@ -49,7 +49,9 @@ const AccountScreen = ({navigation}) => {
             <TouchableOpacity style={styles.section}>
               <Text style={styles.text}>Cẩm nang trồng cây</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.section}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('CartHistory')}
+              style={styles.section}>
               <Text style={styles.text}>Lịch sử giao dịch</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.section}>
