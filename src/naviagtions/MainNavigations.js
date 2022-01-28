@@ -38,7 +38,6 @@ const MainNavigations = () => {
         <Stack.Screen
           name={'Cart'}
           component={CartScreen}
-          options={headerScreen('GIỎ HÀNG')}
         />
         <Stack.Screen
           name={'CartHistory'}

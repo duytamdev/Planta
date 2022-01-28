@@ -4,43 +4,44 @@ import {Text, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {Checkbox} from 'react-native-paper';
 import {ColorsGlobal as GlobalColor} from '../assets/ColorsGlobal';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
-const ProductItemInCart = ({style}) => {
-  const [checked, setChecked] = useState(false);
-  const [quantity, setQuantity] = useState(1);
-  const handleChangeQuantity = isAdd => {
-    if (isAdd) {
-      setQuantity(quantity + 1);
-    } else {
-      if (quantity > 0) {
-        setQuantity(quantity - 1);
-      }
-    }
-  };
+const ProductItemInCart = ({
+  style,
+  image,
+  name,
+  madein,
+  price,
+  checked,
+  quantity,
+}) => {
+  // const handleChangeQuantity = isAdd => {
+  //   if (isAdd) {
+  //     setQuantity(quantity + 1);
+  //   } else {
+  //     if (quantity > 0) {
+  //       setQuantity(quantity - 1);
+  //     }
+  //   }
+  // };
   return (
-    <TouchableOpacity style={[styles.container,style]}>
+    <TouchableOpacity style={[styles.container, style]}>
       <Checkbox
+        onPress={() => console.log('ji')}
         color={GlobalColor.main}
         status={checked ? 'checked' : 'unchecked'}
-        onPress={() => {
-          setChecked(!checked);
-        }}
       />
-      <Image
-        source={require('../assets/images/grow-kit-main_540x.png')}
-        style={styles.image}
-      />
+      <Image source={image} style={styles.image} />
       <View>
         <View style={styles.nameContainer}>
-          <Text style={styles.name}>Spider plant | </Text>
-          <Text style={styles.description}>ưu bông</Text>
+          <Text numberOfLines={1} style={styles.name}>{`${name} |`}</Text>
+          <Text style={styles.description}>{madein}</Text>
         </View>
-        <Text style={styles.price}>250000</Text>
+        <Text style={styles.price}>{`${price}đ`}</Text>
         <View style={styles.quantityContainer}>
-          <TouchableOpacity onPress={() => handleChangeQuantity(false)}>
+          <TouchableOpacity>
             <AntDesignIcon name={'minussquareo'} size={24} color={'#000'} />
           </TouchableOpacity>
           <Text style={styles.quantity}>{quantity}</Text>
-          <TouchableOpacity onPress={() => handleChangeQuantity(true)}>
+          <TouchableOpacity>
             <AntDesignIcon name={'plussquareo'} size={24} color={'#000'} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.removeTextContainer}>

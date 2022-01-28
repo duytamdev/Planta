@@ -606,3 +606,68 @@ export const productCartHistory = {
     },
   ],
 };
+export const productInCart = [
+  {
+    product: {
+      _id: '61d12d14555401c8610cfa3e',
+      name: 'Aethusa cynapium L.',
+      price: 2,
+      madein: 'Somalia',
+      quantity: 1632117070,
+      category: '61d11bf386511f0016f490c9',
+      images: [
+        'https://2.pik.vn/2022764d0cef-ffb4-4dee-a1a6-f4c0ce35fa17.jpg',
+        'https://2.pik.vn/2022b3b441fd-3346-4e00-b45a-3cfe53cce7cd.jpg',
+      ],
+      sold: 82,
+      size: 'L',
+      createdAt: '2021-02-16T08:01:58.000Z',
+      updatedAt: '2021-07-04T15:18:34.000Z',
+    },
+    quantity: 2,
+    price: 1,
+    checked: false,
+  },
+  {
+    product: {
+      _id: '61d12d14555401c8610cfa3z',
+      name: 'Aethusa cynapium L.',
+      price: 2,
+      madein: 'Somalia',
+      quantity: 1632117070,
+      category: '61d11bf386511f0016f490c9',
+      images: [
+        'https://2.pik.vn/2022764d0cef-ffb4-4dee-a1a6-f4c0ce35fa17.jpg',
+        'https://2.pik.vn/2022b3b441fd-3346-4e00-b45a-3cfe53cce7cd.jpg',
+      ],
+      sold: 82,
+      size: 'L',
+      createdAt: '2021-02-16T08:01:58.000Z',
+      updatedAt: '2021-07-04T15:18:34.000Z',
+    },
+    quantity: 5,
+    price: 1,
+    checked: true,
+  },
+  {
+    product: {
+      _id: '61d12d14555401c8610cfa3r',
+      name: 'Aethusa cynapium L.',
+      price: 2,
+      madein: 'Somalia',
+      quantity: 1632117070,
+      category: '61d11bf386511f0016f490c9',
+      images: [
+        'https://2.pik.vn/2022764d0cef-ffb4-4dee-a1a6-f4c0ce35fa17.jpg',
+        'https://2.pik.vn/2022b3b441fd-3346-4e00-b45a-3cfe53cce7cd.jpg',
+      ],
+      sold: 82,
+      size: 'L',
+      createdAt: '2021-02-16T08:01:58.000Z',
+      updatedAt: '2021-07-04T15:18:34.000Z',
+    },
+    quantity: 3,
+    price: 1,
+    checked: false,
+  },
+];

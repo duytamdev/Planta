@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {memo} from 'react';
 
-import {Text, View, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {ImageSlider} from 'react-native-image-slider-banner';
 const MySlide = ({images1, images2}) => {
   return (
@@ -31,4 +31,4 @@ const styles = StyleSheet.create({
     height: 270,
   },
 });
-export default MySlide;
+export default memo(MySlide);
