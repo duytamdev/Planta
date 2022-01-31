@@ -60,6 +60,8 @@ const CartScreen = ({navigation}) => {
       />
       {data.length > 0 ? (
         <FlatList
+          style={styles.flatList}
+          showsVerticalScrollIndicator={false}
           keyExtractor={item => item._id}
           data={data}
           renderItem={({item}) => {
@@ -71,7 +73,6 @@ const CartScreen = ({navigation}) => {
                 checked={item.checked}
                 image={{uri: item.product.images[0]}}
                 quantity={item.quantity}
-                key={item._id}
                 style={styles.item}
               />
             );
@@ -85,22 +86,34 @@ const CartScreen = ({navigation}) => {
       <View style={styles.totalContainer}>
         <View style={styles.totalView}>
           <Text>Tạm tính</Text>
-          <Text style={styles.text}>500.000d</Text>
+          <Text style={styles.totalPrice}>500.000d</Text>
         </View>
-        <TouchableOpacity style={styles.totalButton}>
-          <Text style={styles.textTotalButton}>Tiến thành thanh toán</Text>
-          <Icon
-            type={Icons.AntDesign}
-            name={'arrowright'}
-            color={'#fff'}
-            size={24}
-          />
-        </TouchableOpacity>
+        {data && (
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Payment')}
+            style={styles.totalButton}>
+            <Text style={styles.textTotalButton}>Tiến thành thanh toán</Text>
+            <Icon
+              type={Icons.AntDesign}
+              name={'arrowright'}
+              color={'#fff'}
+              size={24}
+            />
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );
 };
 const styles = StyleSheet.create({
+  totalPrice: {
+    fontSize: 22,
+    color: ColorsGlobal.main,
+    fontWeight:'500',
+  },
+  flatList: {
+    marginBottom: 130,
+  },
   textTotalButton: {
     color: '#fff',
     fontWeight: '400',

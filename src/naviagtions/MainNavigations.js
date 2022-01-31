@@ -9,6 +9,7 @@ import UpdateInfo from '../screens/UpdateInfo';
 import CartScreen from '../screens/CartScreen';
 import DetailsProduct from '../screens/DetailsProduct';
 import CartHistoryScreen from '../screens/CartHistoryScreen';
+import PaymentScreen from '../screens/PaymentScreen';
 
 const Stack = createNativeStackNavigator();
 const headerScreen = title => ({
@@ -35,14 +36,16 @@ const MainNavigations = () => {
           name={'UpdateInfo'}
           component={UpdateInfo}
         />
-        <Stack.Screen
-          name={'Cart'}
-          component={CartScreen}
-        />
+        <Stack.Screen name={'Cart'} component={CartScreen} />
         <Stack.Screen
           name={'CartHistory'}
           component={CartHistoryScreen}
           options={headerScreen('LỊCH SỬ ĐƠN HÀNG')}
+        />
+        <Stack.Screen
+          name={'Payment'}
+          component={PaymentScreen}
+          options={headerScreen('THANH TOÁN')}
         />
       </Stack.Navigator>
     </NavigationContainer>

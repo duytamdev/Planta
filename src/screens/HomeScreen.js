@@ -57,14 +57,14 @@ const HomeScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <FlatList
+        showsVerticalScrollIndicator={false}
         keyExtractor={item => item._id}
         ListHeaderComponent={SectionHeader}
         ListFooterComponent={SectionFooter}
         data={data}
-        renderItem={({item, index}) => {
+        renderItem={({item}) => {
           return (
             <ListProduct
-              key={index}
               navigation={navigation}
               products={item.products}
               name={item.name}
@@ -76,7 +76,6 @@ const HomeScreen = ({navigation}) => {
   );
 };
 const styles = StyleSheet.create({
-  sectionCompo: {},
   sectionTreesContainer: {
     marginTop: 25,
   },

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Text, View, StyleSheet} from 'react-native';
+import {Text, View, StyleSheet, ScrollView} from 'react-native';
 import MyInput from '../components/MyInput';
 import {ColorsGlobal} from '../assets/ColorsGlobal';
 import MyButton from '../components/MyButton';
@@ -15,23 +15,34 @@ const UpDateInfo = () => {
         </Text>
         <View style={styles.section}>
           <MyInput
+            style={styles.containerInput}
+            styleInput={styles.stylesInput}
             styleLine={styles.styleLine}
             placeholder={'Nguyễn Duy Tâm'}
           />
           <MyInput
+            style={styles.containerInput}
+            styleInput={styles.stylesInput}
             styleLine={styles.styleLine}
             placeholder={'tamduynguyen0819@gmail.com'}
           />
           <MyInput
+            style={styles.containerInput}
+            styleInput={styles.stylesInput}
             styleLine={styles.styleLine}
             placeholder={'Quận 12, Hồ Chí Minh'}
           />
-          <MyInput styleLine={styles.styleLine} placeholder={'0908456115'} />
+          <MyInput
+            style={styles.containerInput}
+            styleInput={styles.stylesInput}
+            styleLine={styles.styleLine}
+            placeholder={'0908456115'}
+          />
         </View>
       </View>
       <MyButton
         styleContainer={styles.buttonContainer}
-        styleButton={styles.button}
+        styleButton={styles.buttonDisabled}
         styleText={styles.textButton}
         title={'LƯU THÔNG TIN'}
       />
@@ -39,9 +50,13 @@ const UpDateInfo = () => {
   );
 };
 const styles = StyleSheet.create({
+  containerInput: {
+    marginTop: 8,
+  },
+  stylesInput: {borderBottomWidth: 0.5},
   container: {
-    position: 'relative',
     flex: 1,
+    position: 'relative',
     paddingTop: 15,
     backgroundColor: '#fff',
     paddingHorizontal: 48,
@@ -59,14 +74,19 @@ const styles = StyleSheet.create({
   textButton: {
     color: '#fff',
   },
-  button: {
+  buttonDisabled: {
     backgroundColor: ColorsGlobal.gray,
+    borderRadius: 8,
+  },
+  buttonNomad: {
+    backgroundColor: ColorsGlobal.main,
+    borderRadius: 8,
   },
   buttonContainer: {
+    width: '100%',
+    marginStart: 45,
     position: 'absolute',
-    bottom: 45,
-    left: 45,
-    right: 45,
+    bottom: 20,
   },
 });
 export default UpDateInfo;

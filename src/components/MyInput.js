@@ -8,6 +8,7 @@ const MyInput = ({
   icon,
   iconPosition,
   styleLine,
+  styleInput,
   ...propsInput
 }) => {
   const getFlexDirection = () => {
@@ -21,7 +22,7 @@ const MyInput = ({
   };
   return (
     <View style={style}>
-      <Text style={styles.label}>{textLabel}</Text>
+      {textLabel && <Text style={styles.label}>{textLabel}</Text>}
       <View
         style={[
           styles.containerInput,
@@ -30,9 +31,8 @@ const MyInput = ({
         ]}>
         <View>{icon && icon}</View>
 
-        <TextInput {...propsInput} style={styles.textInput} />
+        <TextInput {...propsInput} style={[styles.textInput, styleInput]} />
       </View>
-      <Line style={[{backgroundColor: '#888'}, styleLine]} />
     </View>
   );
 };
@@ -42,6 +42,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginTop: -6,
     flex: 1,
+    borderBottomWidth: 1,
+    borderBottomColor: '#888',
+    paddingBottom: 6,
+    width: '100%',
   },
   label: {
     marginLeft: 4,

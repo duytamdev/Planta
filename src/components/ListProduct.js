@@ -18,10 +18,12 @@ const ListProduct = ({name, products, navigation}) => {
           products.map(product => {
             return (
               <TouchableOpacity
-                onPress={() => navigation.navigate('DetailsProduct', {product: product})}>
+                style={styles.product}
+                onPress={() =>
+                  navigation.navigate('DetailsProduct', {product: product})
+                }>
                 <ProductItem
                   key={product._id}
-                  style={styles.product}
                   madein={product.madein}
                   name={product.name}
                   price={product.price}
@@ -38,19 +40,20 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 8,
     backgroundColor: '#fff',
-    paddingStart: 15,
   },
   textHeader: {
     color: '#000',
     fontSize: 24,
+    marginStart: 16,
   },
   productsContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
+    paddingHorizontal: 15,
   },
   product: {
-    width: Dimensions.get('window').width / 2 - 50,
+    width: Dimensions.get('window').width / 2 - 30,
   },
 });
 export default ListProduct;

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
 import Icon, {Icons} from '../components/Icons';
 import MySlide from '../components/MySlider';
 import {ColorsGlobal} from '../assets/ColorsGlobal';
@@ -34,7 +34,7 @@ const DetailsProduct = ({route, navigation}) => {
     navigation.navigate('Cart');
   };
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.headerContainer}>
         <TouchableOpacity onPress={handleBack}>
           <Icon
@@ -102,7 +102,7 @@ const DetailsProduct = ({route, navigation}) => {
           title={'Chọn Mua'}
         />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 const styles = StyleSheet.create({
