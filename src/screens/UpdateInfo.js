@@ -1,9 +1,9 @@
 import React from 'react';
 
 import {Text, View, StyleSheet, ScrollView} from 'react-native';
-import MyInput from '../components/MyInput';
+import MyInput from '../components/common/MyInput';
 import {ColorsGlobal} from '../assets/ColorsGlobal';
-import MyButton from '../components/MyButton';
+import MyButton from '../components/common/MyButton';
 
 const UpDateInfo = () => {
   return (

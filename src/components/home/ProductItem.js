@@ -8,7 +8,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import {ColorsGlobal} from '../assets/ColorsGlobal';
+import {ColorsGlobal} from '../../assets/ColorsGlobal';
 const WIDTH = Dimensions.get('screen').width;
 
 const ProductItem = ({image, name, madein, price, style, ...props}) => {

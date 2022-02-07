@@ -4,9 +4,9 @@ import {Image, ImageBackground, StyleSheet} from 'react-native';
 const MyBackground = () => {
   return (
     <ImageBackground
-      source={require('../assets/images/mesh-gradient.png')}
+      source={require('../../assets/images/mesh-gradient.png')}
       style={styles.sectionLogo}>
-      <Image source={require('../assets/images/carrotColor.png')} />
+      <Image source={require('../../assets/images/carrotColor.png')} />
     </ImageBackground>
   );
 };

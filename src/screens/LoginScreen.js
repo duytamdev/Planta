@@ -8,10 +8,10 @@ import {
   ScrollView,
 } from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import MyInput from '../components/MyInput';
-import MyButton from '../components/MyButton';
+import MyInput from '../components/common/MyInput';
+import MyButton from '../components/common/MyButton';
 import Icon from 'react-native-vector-icons/Entypo';
-import MyBackground from '../components/MyBackground';
+import MyBackground from '../components/userScreen/MyBackground';
 const LoginScreen = ({navigation}) => {
   const [isSecure, setIsSecure] = useState(true);
   const [email, setEmail] = useState('');

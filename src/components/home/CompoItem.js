@@ -15,7 +15,7 @@ const CompoItem = () => {
       <View style={styles.imageContainer}>
         <Image
           style={styles.image}
-          source={require('../assets/images/grow-kit-main_540x.png')}
+          source={require('../../assets/images/grow-kit-main_540x.png')}
         />
       </View>
     </View>

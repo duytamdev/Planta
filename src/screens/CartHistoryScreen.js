@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 import {Text, View, StyleSheet, Dimensions, FlatList} from 'react-native';
-import CartHistoryItem from '../components/CartHistoryItem';
+import CartHistoryItem from '../components/cart/CartHistoryItem';
 import {productCartHistory} from '../api/PlantaAPI';
 const displayDay = day => {
   switch (day) {

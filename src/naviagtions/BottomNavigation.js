@@ -7,7 +7,7 @@ import NotificationScreen from '../screens/NotificationScreen';
 import AccountScreen from '../screens/AccountSceen';
 import * as Animatable from 'react-native-animatable';
 import {TouchableOpacity, StyleSheet} from 'react-native';
-import Icon, {Icons} from '../components/Icons';
+import Icon, {Icons} from '../assets/Icons';
 
 const TabButton = props => {
   const {children, onPress, accessibilityState} = props;

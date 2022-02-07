@@ -1,14 +1,13 @@
 import React from 'react';
 
 import {
-  Text,
   View,
   StyleSheet,
   TextInput,
   TouchableOpacity,
 } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-import Line from './Line';
+import Line from '../common/Line';
 const SearchBar = ({style, onPressSearch, ...props}) => {
   return (
     <View style={[styles.container, style]}>

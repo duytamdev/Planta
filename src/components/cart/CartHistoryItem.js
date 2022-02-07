@@ -4,7 +4,7 @@ import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import {
   ColorsGlobal as GlobalColor,
   ColorsGlobal,
-} from '../assets/ColorsGlobal';
+} from '../../assets/ColorsGlobal';
 
 const CartHistoryItem = ({style, date, status, quantity, total}) => {
   return (

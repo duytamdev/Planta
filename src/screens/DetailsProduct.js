@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 
 import {Text, View, StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
-import Icon, {Icons} from '../components/Icons';
-import MySlide from '../components/MySlider';
+import Icon, {Icons} from '../assets/Icons';
+import MySlide from '../components/detailProduct/MySlider';
 import {ColorsGlobal} from '../assets/ColorsGlobal';
-import MyButton from '../components/MyButton';
-import DetailsInfoProduct from '../components/DetailsInfoProduct';
+import MyButton from '../components/common/MyButton';
+import DetailsInfoProduct from '../components/detailProduct/DetailsInfoProduct';
 
 const DetailsProduct = ({route, navigation}) => {
   const {product} = route.params;

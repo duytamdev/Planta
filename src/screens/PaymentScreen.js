@@ -9,10 +9,10 @@ import {
   Dimensions,
   Alert,
 } from 'react-native';
-import MyInput from '../components/MyInput';
+import MyInput from '../components/common/MyInput';
 import {ColorsGlobal} from '../assets/ColorsGlobal';
-import Icon, {Icons} from '../components/Icons';
-import MyButton from '../components/MyButton';
+import Icon, {Icons} from '../assets/Icons';
+import MyButton from '../components/common/MyButton';
 const PaymentScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
   return (

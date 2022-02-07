@@ -10,7 +10,7 @@ import {
   Alert,
 } from 'react-native';
 import {ColorsGlobal} from '../assets/ColorsGlobal';
-import Line from '../components/Line';
+import Line from '../components/common/Line';
 
 const AccountScreen = ({navigation}) => {
   const handleUpdateInfo = () => {

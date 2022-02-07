@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 import {Text, View, StyleSheet, FlatList} from 'react-native';
-import ProductItemNotification from '../components/ProductItemNotification';
+import ProductItemNotification from '../components/notification/ProductItemNotification';
 
 const NotificationScreen = () => {
   const [notfications, setNotfications] = useState([

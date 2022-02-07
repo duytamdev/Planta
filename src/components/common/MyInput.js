@@ -1,6 +1,5 @@
 import React from 'react';
 import {View, Text, StyleSheet, TextInput} from 'react-native';
-import Line from './Line';
 
 const MyInput = ({
   textLabel,

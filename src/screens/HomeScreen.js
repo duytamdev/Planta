@@ -11,9 +11,9 @@ import {
 } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import {ColorsGlobal} from '../assets/ColorsGlobal';
-import CompoItem from '../components/CompoItem';
+import CompoItem from '../components/home/CompoItem';
 import {productForHome} from '../api/PlantaAPI';
-import ListProduct from '../components/ListProduct';
+import ListProduct from '../components/home/ListProduct';
 
 const HomeScreen = ({navigation}) => {
   const SectionHeader = () => {

@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 
 import {FlatList, StyleSheet, Text, View} from 'react-native';
-import ProductItemInSearch from '../components/ProductItemInSearch';
-import SearchBar from '../components/SearchBar';
+import ProductItemInSearch from '../components/search/ProductItemInSearch';
+import SearchBar from '../components/search/SearchBar';
 import {productForHome} from '../api/PlantaAPI';
 
 const SearchScreen = () => {

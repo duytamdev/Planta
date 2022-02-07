@@ -8,9 +8,9 @@ import {
   FlatList,
   Alert,
 } from 'react-native';
-import ProductItemInCart from '../components/ProductItemInCart';
+import ProductItemInCart from '../components/cart/ProductItemInCart';
 import {productInCart} from '../api/PlantaAPI';
-import Icon, {Icons} from '../components/Icons';
+import Icon, {Icons} from '../assets/Icons';
 import {ColorsGlobal} from '../assets/ColorsGlobal';
 
 const Header = ({onBack, isShowRight, onClickDeleteAll}) => {
@@ -67,6 +67,7 @@ const CartScreen = ({navigation}) => {
           renderItem={({item}) => {
             return (
               <ProductItemInCart
+                key={item._id}
                 price={item.price}
                 name={item.product.name}
                 madein={item.product.madein}
@@ -109,7 +110,7 @@ const styles = StyleSheet.create({
   totalPrice: {
     fontSize: 22,
     color: ColorsGlobal.main,
-    fontWeight:'500',
+    fontWeight: '500',
   },
   flatList: {
     marginBottom: 130,
