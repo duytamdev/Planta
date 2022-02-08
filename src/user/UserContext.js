@@ -1,4 +1,4 @@
-import React, {createContext, useState, useEffect} from 'react';
+import React, {createContext, useState} from 'react';
 import {login, register} from './UserService';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -9,7 +9,7 @@ const UserProvider = ({children}) => {
   const onLogin = async (email, password) => {
     try {
       const res = await login(email, password);
-      if (res.error == false) {
+      if (res.error === false) {
         const token = res.data.token;
         await AsyncStorage.setItem('token', token);
         setIsLogin(true);

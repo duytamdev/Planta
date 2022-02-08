@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 
 import {Text, View, StyleSheet, Dimensions, FlatList} from 'react-native';
 import CartHistoryItem from '../components/cart/CartHistoryItem';
 import {productCartHistory} from '../api/PlantaAPI';
+import {ProductContext} from '../product/ProductContext';
 const displayDay = day => {
   switch (day) {
     case 0:
@@ -33,8 +34,16 @@ const displayTime = time => {
   return `${day} ${date}/${month}/${year}`;
 };
 const CartHistoryScreen = () => {
-  const [data, setData] = useState(productCartHistory.data);
-  console.log(data);
+  const {onGetProductInCartHistory} = useContext(ProductContext);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await onGetProductInCartHistory();
+      setData(res);
+    };
+    fetchData();
+  }, []);
   return (
     <View style={styles.container}>
       <FlatList

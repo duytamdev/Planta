@@ -23,13 +23,12 @@ const LoginScreen = ({navigation}) => {
     navigation.navigate('Register');
   };
   const handleLogin = async () => {
-    // navigation.replace('BottomTabs');
     const result = await onLogin(email, password);
     if (result === false) {
-      console.log('Login faild');
+      ToastAndroid.show('Đăng nhập không thành công!', 2000);
     } else {
       navigation.replace('BottomTabs');
-      ToastAndroid.show('Login success', 2000);
+      ToastAndroid.show('Đăng nhập thành công', 2000);
     }
   };
   return (

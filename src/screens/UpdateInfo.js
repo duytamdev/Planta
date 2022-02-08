@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Text, View, StyleSheet, ScrollView} from 'react-native';
+import {Text, View, StyleSheet} from 'react-native';
 import MyInput from '../components/common/MyInput';
 import {ColorsGlobal} from '../assets/ColorsGlobal';
 import MyButton from '../components/common/MyButton';

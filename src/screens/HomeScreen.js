@@ -53,13 +53,12 @@ const HomeScreen = ({navigation}) => {
   const {onGetProductForHomePage} = useContext(ProductContext);
   const [data, setData] = useState([]);
   useEffect(() => {
-    async function fetchData() {
+    const fetchData = async () => {
       const res = await onGetProductForHomePage();
       setData(res);
-    }
+    };
     fetchData();
   }, []);
-  console.log(data);
   const handleToCart = () => {
     navigation.navigate('Cart');
   };
