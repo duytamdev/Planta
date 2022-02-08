@@ -10,6 +10,7 @@ import CartScreen from '../screens/CartScreen';
 import DetailsProduct from '../screens/DetailsProduct';
 import CartHistoryScreen from '../screens/CartHistoryScreen';
 import PaymentScreen from '../screens/PaymentScreen';
+import OrderSuccess from '../screens/OrderSuccess';
 
 const Stack = createNativeStackNavigator();
 const headerScreen = title => ({
@@ -47,6 +48,7 @@ const MainNavigations = () => {
           component={PaymentScreen}
           options={headerScreen('THANH TOÁN')}
         />
+        <Stack.Screen name={'OrderSuccess'} component={OrderSuccess} />
       </Stack.Navigator>
     </NavigationContainer>
   );

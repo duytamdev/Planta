@@ -13,8 +13,12 @@ import MyInput from '../components/common/MyInput';
 import {ColorsGlobal} from '../assets/ColorsGlobal';
 import Icon, {Icons} from '../assets/Icons';
 import MyButton from '../components/common/MyButton';
-const PaymentScreen = () => {
+const PaymentScreen = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const handleOrder = () => {
+    setModalVisible(!modalVisible);
+    navigation.navigate('OrderSuccess');
+  };
   return (
     <View style={styles.container}>
       <View style={styles.sectionContainer}>
@@ -90,6 +94,7 @@ const PaymentScreen = () => {
               Xác nhận thanh toán?
             </Text>
             <MyButton
+              onPress={handleOrder}
               title={'Đồng ý'}
               styleText={[styles.text, styles.textButton]}
               styleContainer={[

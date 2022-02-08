@@ -1,10 +1,13 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
+import {UserContext} from '../user/UserContext';
 
 const SplashScreen = ({navigation}) => {
+  const {isLogin} = useContext(UserContext);
+  console.log(isLogin);
   useEffect(() => {
     const timeout = setTimeout(() => {
-      navigation.replace('Login');
+      navigation.replace(isLogin ? 'BottomTabs' : 'Login');
     }, 3000);
     return () => {
       clearTimeout(timeout);

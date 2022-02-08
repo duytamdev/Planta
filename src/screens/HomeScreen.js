@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 
 import {
   FlatList,
@@ -7,13 +7,12 @@ import {
   Text,
   TouchableOpacity,
   View,
-  ScrollView,
 } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import {ColorsGlobal} from '../assets/ColorsGlobal';
 import CompoItem from '../components/home/CompoItem';
-import {productForHome} from '../api/PlantaAPI';
 import ListProduct from '../components/home/ListProduct';
+import {ProductContext} from '../product/ProductContext';
 
 const HomeScreen = ({navigation}) => {
   const SectionHeader = () => {
@@ -50,7 +49,17 @@ const HomeScreen = ({navigation}) => {
       </View>
     );
   };
-  const [data, setData] = useState(productForHome.data);
+
+  const {onGetProductForHomePage} = useContext(ProductContext);
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      const res = await onGetProductForHomePage();
+      setData(res);
+    }
+    fetchData();
+  }, []);
+  console.log(data);
   const handleToCart = () => {
     navigation.navigate('Cart');
   };
@@ -65,6 +74,7 @@ const HomeScreen = ({navigation}) => {
         renderItem={({item}) => {
           return (
             <ListProduct
+              key={item._id}
               navigation={navigation}
               products={item.products}
               name={item.name}

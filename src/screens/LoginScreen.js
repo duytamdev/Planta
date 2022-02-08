@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   View,
   Text,
@@ -6,21 +6,31 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   ScrollView,
+  ToastAndroid,
 } from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import MyInput from '../components/common/MyInput';
 import MyButton from '../components/common/MyButton';
 import Icon from 'react-native-vector-icons/Entypo';
 import MyBackground from '../components/userScreen/MyBackground';
+import {UserContext} from '../user/UserContext';
 const LoginScreen = ({navigation}) => {
   const [isSecure, setIsSecure] = useState(true);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('duytamdev@gmail.com');
+  const [password, setPassword] = useState('123456');
+  const {onLogin} = useContext(UserContext);
   const onPressSignUp = () => {
     navigation.navigate('Register');
   };
-  const handleLogin = () => {
-    navigation.replace('BottomTabs');
+  const handleLogin = async () => {
+    // navigation.replace('BottomTabs');
+    const result = await onLogin(email, password);
+    if (result === false) {
+      console.log('Login faild');
+    } else {
+      navigation.replace('BottomTabs');
+      ToastAndroid.show('Login success', 2000);
+    }
   };
   return (
     <KeyboardAvoidingView style={styles.container}>
