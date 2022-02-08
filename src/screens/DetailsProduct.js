@@ -14,13 +14,13 @@ const DetailsProduct = ({route, navigation}) => {
   const handleChangeQuantity = isAdd => {
     if (isAdd) {
       setQuantity(pre => {
-        setSumPrice(product.price * pre + 1);
+        setSumPrice(product.price * (pre + 1));
         return pre + 1;
       });
     } else {
       if (quantity >= 1) {
         setQuantity(pre => {
-          setSumPrice(product.price * pre - 1);
+          setSumPrice(product.price * (pre - 1));
 
           return pre - 1;
         });

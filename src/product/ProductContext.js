@@ -16,7 +16,9 @@ const ProductProvider = ({children}) => {
     return [];
   };
   return (
-    <ProductContext.Provider value={{onGetProductForHomePage}}>{children}</ProductContext.Provider>
+    <ProductContext.Provider value={{onGetProductForHomePage}}>
+      {children}
+    </ProductContext.Provider>
   );
 };
 export {ProductContext, ProductProvider};
