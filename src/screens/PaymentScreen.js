@@ -69,7 +69,7 @@ const PaymentScreen = ({navigation}) => {
       <View style={styles.sectionBottom}>
         <View style={styles.viewRow}>
           <Text style={styles.text}>Tạm tính</Text>
-          <Text>500.00d</Text>
+          <Text style={styles.text}>500.00d</Text>
         </View>
         <View style={styles.viewRow}>
           <Text style={styles.text}>Phí vận chuyển</Text>

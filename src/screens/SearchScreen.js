@@ -1,54 +1,50 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import ProductItemInSearch from '../components/search/ProductItemInSearch';
 import SearchBar from '../components/search/SearchBar';
-import {productForHome} from '../api/PlantaAPI';
-
+import {ProductContext} from '../product/ProductContext';
 const SearchScreen = () => {
-  const [products, setProducts] = useState(productForHome.data[0].products);
-  const [productsFilter, setProductsFilter] = useState(products);
+  const [productsFilter, setProductsFilter] = useState([]);
 
   const [textSearch, setTextSearch] = useState('');
-  const handleSearch = value => {
-    setTextSearch(pre => {
-      setProductsFilter(
-        products.filter(product => {
-          if (value === '') {
-            return products;
-          } else {
-            return product.name.toLowerCase().includes(value.toLowerCase());
-          }
-        }),
-      );
-      return value;
-    });
-  };
+  const {onGetProductByName} = useContext(ProductContext);
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await onGetProductByName(textSearch);
+      setProductsFilter(res);
+    };
+    fetchData();
+  }, [textSearch]);
   return (
     <View style={styles.container}>
       <SearchBar
-        onPressSearch={() => handleSearch(textSearch)}
         value={textSearch}
-        onChangeText={value => handleSearch(value)}
+        onChangeText={value => setTextSearch(value)}
         style={styles.searchBar}
         placeholder={'Tên sản phẩm'}
       />
-
-      <FlatList
-        data={productsFilter}
-        renderItem={({item, index}) => {
-          return (
-            <ProductItemInSearch
-              key={index}
-              name={item.name}
-              price={item.price}
-              quantity={item.quantity}
-              description={item.madein}
-              image={{uri: item.images[0]}}
-            />
-          );
-        }}
-      />
+      {productsFilter.length > 0 ? (
+        <FlatList
+          data={productsFilter}
+          renderItem={({item, index}) => {
+            return (
+              <ProductItemInSearch
+                key={index}
+                name={item.name}
+                price={item.price}
+                quantity={item.quantity}
+                description={item.madein}
+                image={{uri: item.images[0]}}
+              />
+            );
+          }}
+        />
+      ) : (
+        <View style={styles.contextEmpty}>
+          <Text style={styles.textEmpty}>Không tìm thấy sản phẩm !</Text>
+        </View>
+      )}
     </View>
   );
 };
@@ -59,6 +55,14 @@ const styles = StyleSheet.create({
   },
   searchBar: {
     marginBottom: 20,
+  },
+  contextEmpty: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  textEmpty: {
+    fontSize: 20,
   },
 });
 export default SearchScreen;
