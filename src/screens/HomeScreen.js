@@ -14,6 +14,7 @@ import CompoItem from '../components/home/CompoItem';
 import ListProduct from '../components/home/ListProduct';
 import {ProductContext} from '../product/ProductContext';
 import ProgressDialog from 'react-native-progress-dialog';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HomeScreen = ({navigation}) => {
   const SectionHeader = () => {
@@ -67,8 +68,7 @@ const HomeScreen = ({navigation}) => {
   const handleToCart = () => {
     navigation.navigate('Cart');
   };
-  const handleRefreshing = () => {
-  };
+  const handleRefreshing = () => {};
   return (
     <View style={styles.container}>
       <ProgressDialog visible={isLoading} />

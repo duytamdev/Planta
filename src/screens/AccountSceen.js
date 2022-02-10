@@ -11,19 +11,28 @@ import {
 } from 'react-native';
 import {ColorsGlobal} from '../assets/ColorsGlobal';
 import Line from '../components/common/Line';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const AccountScreen = ({navigation}) => {
   const handleUpdateInfo = () => {
     navigation.navigate('UpdateInfo');
   };
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    navigation.replace('Login');
+    try {
+      await AsyncStorage.setItem('isLogin', JSON.stringify(false));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const logout = () => {
     Alert.alert('Xác Nhận Thoát', 'Bạn thật sự muốn đăng xuất', [
       {
         text: 'Huỷ',
         onPress: null,
         style: 'cancel',
       },
-      {text: 'Đăng Xuất', onPress: () => navigation.replace('Login')},
+      {text: 'Đăng Xuất', onPress: handleLogout},
     ]);
   };
   return (
@@ -67,7 +76,7 @@ const AccountScreen = ({navigation}) => {
             <TouchableOpacity style={styles.section}>
               <Text style={styles.text}>Chính sách quyền riêng tư</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.section} onPress={handleLogout}>
+            <TouchableOpacity style={styles.section} onPress={logout}>
               <Text style={[styles.text, styles.textLogout]}>Đăng Xuất</Text>
             </TouchableOpacity>
           </View>

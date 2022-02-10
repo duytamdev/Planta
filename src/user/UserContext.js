@@ -12,6 +12,7 @@ const UserProvider = ({children}) => {
       if (res.error === false) {
         const token = res.data.token;
         await AsyncStorage.setItem('token', token);
+        await AsyncStorage.setItem('isLogin', JSON.stringify(true));
         setIsLogin(true);
         return true;
       }

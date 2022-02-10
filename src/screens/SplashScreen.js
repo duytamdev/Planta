@@ -1,13 +1,20 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
-import {UserContext} from '../user/UserContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SplashScreen = ({navigation}) => {
-  const {isLogin} = useContext(UserContext);
-  console.log(isLogin);
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      navigation.replace(isLogin ? 'BottomTabs' : 'Login');
+    const isLogin = async () => {
+      try {
+        const jsonValue = await AsyncStorage.getItem('isLogin');
+        return jsonValue != null ? JSON.parse(jsonValue) : false;
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    const timeout = setTimeout(async () => {
+      const logined = await isLogin();
+      await navigation.replace(logined ? 'BottomTabs' : 'Login');
     }, 3000);
     return () => {
       clearTimeout(timeout);
