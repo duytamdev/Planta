@@ -13,6 +13,7 @@ import {ColorsGlobal} from '../assets/ColorsGlobal';
 import CompoItem from '../components/home/CompoItem';
 import ListProduct from '../components/home/ListProduct';
 import {ProductContext} from '../product/ProductContext';
+import ProgressDialog from 'react-native-progress-dialog';
 
 const HomeScreen = ({navigation}) => {
   const SectionHeader = () => {
@@ -52,19 +53,28 @@ const HomeScreen = ({navigation}) => {
 
   const {onGetProductForHomePage} = useContext(ProductContext);
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       const res = await onGetProductForHomePage();
       setData(res);
+      setIsLoading(false);
     };
     fetchData();
   }, []);
   const handleToCart = () => {
     navigation.navigate('Cart');
   };
+  const handleRefreshing = () => {
+  };
   return (
     <View style={styles.container}>
+      <ProgressDialog visible={isLoading} />
       <FlatList
+        onRefresh={handleRefreshing}
+        refreshing={isRefreshing}
         showsVerticalScrollIndicator={false}
         keyExtractor={item => item._id}
         ListHeaderComponent={SectionHeader}
@@ -73,7 +83,6 @@ const HomeScreen = ({navigation}) => {
         renderItem={({item}) => {
           return (
             <ListProduct
-              key={item._id}
               navigation={navigation}
               products={item.products}
               name={item.name}

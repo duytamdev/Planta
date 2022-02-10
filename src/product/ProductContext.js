@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {createContext} from 'react';
 import {
+  getDetailInfoProduct,
   getProductByCategoryAndType,
   getProductByName,
   getProductForHome,
@@ -9,6 +10,7 @@ import {
 
 const ProductContext = createContext();
 const ProductProvider = ({children}) => {
+  const [cart, setCart] = useState([]);
   const onGetProductForHomePage = async () => {
     try {
       const res = await getProductForHome();
@@ -53,6 +55,17 @@ const ProductProvider = ({children}) => {
     }
     return [];
   };
+  const onGetDetailInfoProduct = async productId => {
+    try {
+      const res = await getDetailInfoProduct(productId);
+      if (res.error === false) {
+        return res.data;
+      }
+    } catch (e) {
+      console.log(e);
+    }
+    return null;
+  };
   return (
     <ProductContext.Provider
       value={{
@@ -60,6 +73,9 @@ const ProductProvider = ({children}) => {
         onGetProductInCartHistory,
         onGetProductByName,
         onGetProductByCategoryAndType,
+        onGetDetailInfoProduct,
+        cart,
+        setCart,
       }}>
       {children}
     </ProductContext.Provider>

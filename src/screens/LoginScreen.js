@@ -8,6 +8,7 @@ import {
   ScrollView,
   ToastAndroid,
 } from 'react-native';
+import ProgressDialog from 'react-native-progress-dialog';
 import MyInput from '../components/common/MyInput';
 import MyButton from '../components/common/MyButton';
 import Icon from 'react-native-vector-icons/Entypo';
@@ -19,12 +20,14 @@ const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState('duytamdev@gmail.com');
   const [password, setPassword] = useState('123456');
   const {onLogin} = useContext(UserContext);
-
+  const [isLoading, setIsLoading] = useState(false);
   const onPressSignUp = () => {
     navigation.navigate('Register');
   };
   const handleLogin = async () => {
+    setIsLoading(true);
     const result = await onLogin(email, password);
+    setIsLoading(false);
     if (result === false) {
       ToastAndroid.show('Đăng nhập không thành công!', 2000);
     } else {
@@ -34,6 +37,7 @@ const LoginScreen = ({navigation}) => {
   };
   return (
     <KeyboardAvoidingView style={styles.container}>
+      <ProgressDialog visible={isLoading} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <MyBackground />
         <View style={styles.sectionForm}>

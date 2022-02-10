@@ -3,11 +3,13 @@ import React, {useContext, useEffect, useState} from 'react';
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import ProductItemInSearch from '../components/search/ProductItemInSearch';
 import SearchBar from '../components/search/SearchBar';
+import ProgressDialog from 'react-native-progress-dialog';
+
 import {ProductContext} from '../product/ProductContext';
 const SearchScreen = () => {
   const [productsFilter, setProductsFilter] = useState([]);
-
   const [textSearch, setTextSearch] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const {onGetProductByName} = useContext(ProductContext);
   useEffect(() => {
     const fetchData = async () => {
@@ -16,8 +18,18 @@ const SearchScreen = () => {
     };
     fetchData();
   }, [textSearch]);
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      const res = await onGetProductByName('');
+      setProductsFilter(res);
+      setIsLoading(false);
+    };
+    fetchData();
+  }, []);
   return (
     <View style={styles.container}>
+      <ProgressDialog visible={isLoading} />
       <SearchBar
         value={textSearch}
         onChangeText={value => setTextSearch(value)}

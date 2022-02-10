@@ -18,12 +18,14 @@ const ListProduct = ({name, products, navigation}) => {
           products.map(product => {
             return (
               <TouchableOpacity
+                key={product._id}
                 style={styles.product}
                 onPress={() =>
-                  navigation.navigate('DetailsProduct', {product: product})
+                  navigation.navigate('DetailsProduct', {
+                    productId: product._id,
+                  })
                 }>
                 <ProductItem
-                  key={product._id}
                   madein={product.madein}
                   name={product.name}
                   price={product.price}

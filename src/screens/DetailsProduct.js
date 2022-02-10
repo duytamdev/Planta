@@ -1,16 +1,35 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 
-import {Text, View, StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView, ToastAndroid,
+} from 'react-native';
 import Icon, {Icons} from '../assets/Icons';
 import MySlide from '../components/detailProduct/MySlider';
-import {ColorsGlobal} from '../assets/ColorsGlobal';
 import MyButton from '../components/common/MyButton';
 import DetailsInfoProduct from '../components/detailProduct/DetailsInfoProduct';
+import {ProductContext} from '../product/ProductContext';
+import ProgressDialog from 'react-native-progress-dialog';
 
 const DetailsProduct = ({route, navigation}) => {
-  const {product} = route.params;
-  const [quantity, setQuantity] = useState(1);
-  const [sumPrice, setSumPrice] = useState(product.price);
+  const {productId} = route.params;
+  const [quantity, setQuantity] = useState(0);
+  const [product, setProduct] = useState(null);
+  const [sumPrice, setSumPrice] = useState(0);
+  const {onGetDetailInfoProduct, cart, setCart} = useContext(ProductContext);
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await onGetDetailInfoProduct(productId);
+      setProduct(res);
+    };
+    fetchData();
+  }, []);
+  if (!product) {
+    return <ProgressDialog visible={true} />;
+  }
   const handleChangeQuantity = isAdd => {
     if (isAdd) {
       setQuantity(pre => {
@@ -33,6 +52,30 @@ const DetailsProduct = ({route, navigation}) => {
   const handleGoCart = () => {
     navigation.navigate('Cart');
   };
+  const handleUpdateCart = () => {
+    const check = cart.filter(item => item.product._id == product._id);
+    let temp = cart;
+
+    if (check.length == 0) {
+      // ko có sản phẩm trong giỏ hàng
+      temp.push({
+        product: product,
+        quantity: quantity,
+        price: product.price,
+        checked: false,
+      });
+    } else {
+      // có sản phẩm trông giỏ hàng
+      temp = temp.map(item => {
+        if ((item.product._id = product._id)) {
+          item.quantity += quantity;
+        }
+        return item;
+      });
+    }
+    setCart(temp);
+    ToastAndroid.show('Đã thêm vào giỏ hàng',2000);
+  };
   return (
     <ScrollView style={styles.container}>
       <View style={styles.headerContainer}>
@@ -46,7 +89,7 @@ const DetailsProduct = ({route, navigation}) => {
         </TouchableOpacity>
 
         <Text numberOfLines={1} style={styles.textTitle}>
-          {product.name}
+          {product && product.name}
         </Text>
         <TouchableOpacity onPress={handleGoCart}>
           <Icon
@@ -57,8 +100,13 @@ const DetailsProduct = ({route, navigation}) => {
           />
         </TouchableOpacity>
       </View>
-      <MySlide images1={product.images[0]} images2={product.images[1]} />
-      <DetailsInfoProduct product={product} />
+      {product && (
+        <View>
+          <MySlide images1={product.images[0]} images2={product.images[1]} />
+          <DetailsInfoProduct product={product} />
+        </View>
+      )}
+
       <View style={styles.sectionBottom}>
         <View
           style={{
@@ -93,6 +141,7 @@ const DetailsProduct = ({route, navigation}) => {
           </View>
         </View>
         <MyButton
+          onPress={handleUpdateCart}
           disabled={quantity <= 0}
           styleButton={
             quantity > 0 ? styles.buttonMain : styles.buttonMainDisabled

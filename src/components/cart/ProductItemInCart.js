@@ -12,6 +12,7 @@ const ProductItemInCart = ({
   price,
   checked,
   quantity,
+  onChangeChecked,
 }) => {
   // const handleChangeQuantity = isAdd => {
   //   if (isAdd) {
@@ -25,12 +26,12 @@ const ProductItemInCart = ({
   return (
     <TouchableOpacity style={[styles.container, style]}>
       <Checkbox
-        onPress={() => console.log('ji')}
+        onPress={onChangeChecked}
         color={GlobalColor.main}
         status={checked ? 'checked' : 'unchecked'}
       />
       <Image source={image} style={styles.image} />
-      <View>
+      <View style={{flex: 1}}>
         <View style={styles.nameContainer}>
           <Text numberOfLines={1} style={styles.name}>{`${name} |`}</Text>
           <Text style={styles.description}>{madein}</Text>
@@ -75,6 +76,7 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 16,
     color: '#000',
+    maxWidth: 200,
     fontWeight: '500',
   },
   description: {

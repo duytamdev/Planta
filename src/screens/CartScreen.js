@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 
 import {
   Text,
@@ -9,9 +9,9 @@ import {
   Alert,
 } from 'react-native';
 import ProductItemInCart from '../components/cart/ProductItemInCart';
-import {productInCart} from '../api/PlantaAPI';
 import Icon, {Icons} from '../assets/Icons';
 import {ColorsGlobal} from '../assets/ColorsGlobal';
+import {ProductContext} from '../product/ProductContext';
 
 const Header = ({onBack, isShowRight, onClickDeleteAll}) => {
   return (
@@ -41,14 +41,31 @@ const Header = ({onBack, isShowRight, onClickDeleteAll}) => {
   );
 };
 const CartScreen = ({navigation}) => {
-  const [data, setData] = useState(productInCart);
+  const {cart, setCart} = useContext(ProductContext);
+  const [data, setData] = useState(cart);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const handleClearCart = () => {
+    setCart([]);
+    setData([]);
+  };
+  console.log(data);
+  useEffect(() => {
+    let total = data.reduce((accumulator, product) => {
+      // select product checked
+      if (product.checked) {
+        return accumulator + product.quantity * product.price;
+      }
+      return accumulator;
+    }, 0);
+    setTotalPrice(total);
+  }, [data]);
   const handleDeleteAll = () => {
     Alert.alert('Xác nhận', 'Xoá tất cả trong giỏ hàng ?', [
       {
         text: 'Huỷ',
         style: 'cancel',
       },
-      {text: 'Xoá', onPress: () => console.log('OK Pressed')},
+      {text: 'Xoá', onPress: handleClearCart},
     ]);
   };
   return (
@@ -67,11 +84,11 @@ const CartScreen = ({navigation}) => {
           renderItem={({item}) => {
             return (
               <ProductItemInCart
-                key={item._id}
+                onChangeChecked={{}}
+                checked={item.checked}
                 price={item.price}
                 name={item.product.name}
                 madein={item.product.madein}
-                checked={item.checked}
                 image={{uri: item.product.images[0]}}
                 quantity={item.quantity}
                 style={styles.item}
@@ -84,12 +101,13 @@ const CartScreen = ({navigation}) => {
           <Text style={styles.text}>Giỏ hàng của bạn hiện đang trống!</Text>
         </View>
       )}
-      <View style={styles.totalContainer}>
-        <View style={styles.totalView}>
-          <Text>Tạm tính</Text>
-          <Text style={styles.totalPrice}>500.000d</Text>
-        </View>
-        {data && (
+      {data.length > 0 && (
+        <View style={styles.totalContainer}>
+          <View style={styles.totalView}>
+            <Text>Tạm tính</Text>
+            <Text style={styles.totalPrice}>{`${totalPrice}d`}</Text>
+          </View>
+
           <TouchableOpacity
             onPress={() => navigation.navigate('Payment')}
             style={styles.totalButton}>
@@ -101,8 +119,8 @@ const CartScreen = ({navigation}) => {
               size={24}
             />
           </TouchableOpacity>
-        )}
-      </View>
+        </View>
+      )}
     </View>
   );
 };
