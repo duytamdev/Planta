@@ -78,36 +78,37 @@ const DetailsProduct = ({route, navigation}) => {
     ToastAndroid.show('Đã thêm vào giỏ hàng', 2000);
   };
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <TouchableOpacity onPress={handleBack}>
-          <Icon
-            type={Icons.MaterialIcons}
-            name={'arrow-back-ios'}
-            size={24}
-            color={'#000'}
-          />
-        </TouchableOpacity>
+    <View style={styles.container}>
+      <ScrollView style={styles.scrollContainer}>
+        <View style={styles.headerContainer}>
+          <TouchableOpacity onPress={handleBack}>
+            <Icon
+              type={Icons.MaterialIcons}
+              name={'arrow-back-ios'}
+              size={24}
+              color={'#000'}
+            />
+          </TouchableOpacity>
 
-        <Text numberOfLines={1} style={styles.textTitle}>
-          {product && product.name}
-        </Text>
-        <TouchableOpacity onPress={handleGoCart}>
-          <Icon
-            type={Icons.Ionicons}
-            name={'md-cart-outline'}
-            size={24}
-            color={'#000'}
-          />
-        </TouchableOpacity>
-      </View>
-      {product && (
-        <View>
-          <MySlide images1={product.images[0]} images2={product.images[1]} />
-          <DetailsInfoProduct product={product} />
+          <Text numberOfLines={1} style={styles.textTitle}>
+            {product && product.name}
+          </Text>
+          <TouchableOpacity onPress={handleGoCart}>
+            <Icon
+              type={Icons.Ionicons}
+              name={'md-cart-outline'}
+              size={24}
+              color={'#000'}
+            />
+          </TouchableOpacity>
         </View>
-      )}
-
+        {product && (
+          <View>
+            <MySlide images1={product.images[0]} images2={product.images[1]} />
+            <DetailsInfoProduct product={product} />
+          </View>
+        )}
+      </ScrollView>
       <View style={styles.sectionBottom}>
         <View
           style={{
@@ -152,10 +153,13 @@ const DetailsProduct = ({route, navigation}) => {
           title={'Chọn Mua'}
         />
       </View>
-    </ScrollView>
+    </View>
   );
 };
 const styles = StyleSheet.create({
+  scrollContainer: {
+    marginBottom: 150,
+  },
   textSumPrice: {
     fontWeight: '500',
     color: '#000',
@@ -192,12 +196,16 @@ const styles = StyleSheet.create({
     height: 30,
   },
   quantityControler: {
+    marginTop: 4,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   sectionBottom: {
+    position: 'absolute',
+    bottom: 16,
     marginTop: 32,
+    width: '100%',
   },
   text: {
     fontSize: 18,
@@ -211,6 +219,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   container: {
+    position: 'relative',
     flex: 1,
     backgroundColor: '#fff',
   },
