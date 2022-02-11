@@ -1,10 +1,11 @@
 import React from 'react';
 
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import { StyleSheet, TouchableOpacity} from 'react-native';
 import {
   ColorsGlobal as GlobalColor,
   ColorsGlobal,
 } from '../../assets/ColorsGlobal';
+import Text from '../../assets/TextMy';
 
 const CartHistoryItem = ({style, date, status, quantity, total}) => {
   return (

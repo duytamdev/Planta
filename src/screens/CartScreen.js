@@ -1,13 +1,13 @@
 import React, {useContext, useEffect, useState} from 'react';
 
 import {
-  Text,
   View,
   StyleSheet,
   TouchableOpacity,
   FlatList,
   Alert,
 } from 'react-native';
+import Text from '../assets/TextMy';
 import ProductItemInCart from '../components/cart/ProductItemInCart';
 import Icon, {Icons} from '../assets/Icons';
 import {ColorsGlobal} from '../assets/ColorsGlobal';

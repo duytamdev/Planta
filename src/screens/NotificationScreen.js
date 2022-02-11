@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import {Text, View, StyleSheet, FlatList} from 'react-native';
+import {View, StyleSheet, FlatList} from 'react-native';
 import ProductItemNotification from '../components/notification/ProductItemNotification';
 
 const NotificationScreen = () => {

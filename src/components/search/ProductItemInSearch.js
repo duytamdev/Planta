@@ -1,6 +1,7 @@
 import React from 'react';
 
-import {Text, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, Image} from 'react-native';
+import Text from '../../assets/TextMy';
 
 const ProductItemInSearch = ({
   style,

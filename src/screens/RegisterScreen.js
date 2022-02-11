@@ -1,7 +1,6 @@
 import React, {useContext, useState} from 'react';
 import {
   View,
-  Text,
   StyleSheet,
   ScrollView,
   KeyboardAvoidingView,
@@ -12,7 +11,7 @@ import MyButton from '../components/common/MyButton';
 import Icon from 'react-native-vector-icons/Entypo';
 import MyBackground from '../components/userScreen/MyBackground';
 import {UserContext} from '../user/UserContext';
-
+import Text from '../assets/TextMy';
 const RegisterScreen = ({navigation}) => {
   const [isSecure, setIsSecure] = useState(true);
   const [email, setEmail] = useState('duytam@gmail.com');

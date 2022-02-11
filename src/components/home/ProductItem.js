@@ -1,15 +1,13 @@
 import React from 'react';
 
 import {
-  Text,
   View,
   StyleSheet,
   Image,
-  Dimensions,
-  TouchableOpacity,
 } from 'react-native';
 import {ColorsGlobal} from '../../assets/ColorsGlobal';
-const WIDTH = Dimensions.get('screen').width;
+import Text from '../../assets/TextMy';
+
 
 const ProductItem = ({image, name, madein, price, style, ...props}) => {
   return (

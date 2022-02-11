@@ -1,9 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 
-import {Text, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import { View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {Checkbox} from 'react-native-paper';
 import {ColorsGlobal as GlobalColor} from '../../assets/ColorsGlobal';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
+import Text from '../../assets/TextMy';
+
 const ProductItemInCart = ({
   style,
   image,

@@ -1,8 +1,9 @@
 import React from 'react';
 
-import {Text, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {ColorsGlobal as GlobalColor} from '../../assets/ColorsGlobal';
 import Line from '../common/Line';
+import Text from '../../assets/TextMy';
 
 const ProductItemNotification = ({
   date,

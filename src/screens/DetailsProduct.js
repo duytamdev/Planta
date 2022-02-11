@@ -1,12 +1,13 @@
 import React, {useContext, useEffect, useState} from 'react';
 
 import {
-  Text,
   View,
   StyleSheet,
   TouchableOpacity,
-  ScrollView, ToastAndroid,
+  ScrollView,
+  ToastAndroid,
 } from 'react-native';
+import Text from '../assets/TextMy';
 import Icon, {Icons} from '../assets/Icons';
 import MySlide from '../components/detailProduct/MySlider';
 import MyButton from '../components/common/MyButton';
@@ -74,7 +75,7 @@ const DetailsProduct = ({route, navigation}) => {
       });
     }
     setCart(temp);
-    ToastAndroid.show('Đã thêm vào giỏ hàng',2000);
+    ToastAndroid.show('Đã thêm vào giỏ hàng', 2000);
   };
   return (
     <ScrollView style={styles.container}>

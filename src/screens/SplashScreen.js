@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, StyleSheet, Image} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import PushNotification from 'react-native-push-notification';
-
+import Text from '../assets/TextMy';
 const SplashScreen = ({navigation}) => {
   const createChannels = () => {
     PushNotification.createChannel({

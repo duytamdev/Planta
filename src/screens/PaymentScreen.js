@@ -1,18 +1,17 @@
 import React, {useState} from 'react';
 
 import {
-  Text,
   View,
   StyleSheet,
   TouchableOpacity,
   Modal,
   Dimensions,
-  Alert,
 } from 'react-native';
 import MyInput from '../components/common/MyInput';
 import {ColorsGlobal} from '../assets/ColorsGlobal';
 import Icon, {Icons} from '../assets/Icons';
 import MyButton from '../components/common/MyButton';
+import Text from '../assets/TextMy';
 const PaymentScreen = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const handleOrder = () => {

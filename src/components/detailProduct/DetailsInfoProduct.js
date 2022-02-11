@@ -1,7 +1,8 @@
 import React, {memo} from 'react';
 
-import {Text, View, StyleSheet} from 'react-native';
+import { View, StyleSheet} from 'react-native';
 import {ColorsGlobal} from '../../assets/ColorsGlobal';
+import Text from '../../assets/TextMy';
 
 const DetailsInfoProduct = ({product}) => {
   return (

@@ -1,12 +1,8 @@
 import React from 'react';
 
-import {
-  Text,
-  View,
-  StyleSheet,
-  Dimensions,
-  TouchableOpacity,
-} from 'react-native';
+import {View, StyleSheet, Dimensions, TouchableOpacity} from 'react-native';
+import Text from '../../assets/TextMy';
+
 import ProductItem from './ProductItem';
 
 const ListProduct = ({name, products, navigation}) => {

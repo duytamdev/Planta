@@ -4,7 +4,6 @@ import {
   FlatList,
   ImageBackground,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -14,8 +13,7 @@ import CompoItem from '../components/home/CompoItem';
 import ListProduct from '../components/home/ListProduct';
 import {ProductContext} from '../product/ProductContext';
 import ProgressDialog from 'react-native-progress-dialog';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import PushNotification from 'react-native-push-notification';
+import Text from '../assets/TextMy';
 
 const HomeScreen = ({navigation}) => {
   const SectionHeader = () => {
