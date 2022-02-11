@@ -48,7 +48,6 @@ const CartScreen = ({navigation}) => {
     setCart([]);
     setData([]);
   };
-  console.log(data);
   useEffect(() => {
     let total = data.reduce((accumulator, product) => {
       // select product checked
@@ -68,6 +67,17 @@ const CartScreen = ({navigation}) => {
       {text: 'Xoá', onPress: handleClearCart},
     ]);
   };
+  const handleCheckedItem = idItem => {
+    // const test = data.map(item => {
+    //   if (item.product._id === idItem) {
+    //     return {
+    //       ...item,
+    //       checked: !item.checked,
+    //     };
+    //   }
+    // });
+    // console.log(test);
+  };
   return (
     <View style={styles.container}>
       <Header
@@ -83,16 +93,23 @@ const CartScreen = ({navigation}) => {
           data={data}
           renderItem={({item}) => {
             return (
-              <ProductItemInCart
-                onChangeChecked={{}}
-                checked={item.checked}
-                price={item.price}
-                name={item.product.name}
-                madein={item.product.madein}
-                image={{uri: item.product.images[0]}}
-                quantity={item.quantity}
-                style={styles.item}
-              />
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate('DetailsProduct', {
+                    productId: item.product._id,
+                  })
+                }>
+                <ProductItemInCart
+                  onChangeChecked={() => handleCheckedItem(item.product._id)}
+                  checked={item.checked}
+                  price={item.price}
+                  name={item.product.name}
+                  madein={item.product.madein}
+                  image={{uri: item.product.images[0]}}
+                  quantity={item.quantity}
+                  style={styles.item}
+                />
+              </TouchableOpacity>
             );
           }}
         />

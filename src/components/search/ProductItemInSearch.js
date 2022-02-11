@@ -11,7 +11,7 @@ const ProductItemInSearch = ({
   image,
 }) => {
   return (
-    <TouchableOpacity style={[styles.container, style]}>
+    <View style={[styles.container, style]}>
       <Image style={styles.image} source={image} />
       <View style={styles.content}>
         <View style={styles.containerName}>
@@ -21,7 +21,7 @@ const ProductItemInSearch = ({
         <Text style={styles.text}>{`${price} đ`}</Text>
         <Text style={styles.quantity}>{`Còn ${quantity} sp`}</Text>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 const styles = StyleSheet.create({

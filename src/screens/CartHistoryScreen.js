@@ -1,8 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 
-import {Text, View, StyleSheet, Dimensions, FlatList} from 'react-native';
+import {View, StyleSheet, Dimensions, FlatList} from 'react-native';
 import CartHistoryItem from '../components/cart/CartHistoryItem';
-import {productCartHistory} from '../api/PlantaAPI';
 import {ProductContext} from '../product/ProductContext';
 const displayDay = day => {
   switch (day) {

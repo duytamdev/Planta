@@ -24,7 +24,7 @@ const ProductItemInCart = ({
   //   }
   // };
   return (
-    <TouchableOpacity style={[styles.container, style]}>
+    <View style={[styles.container, style]}>
       <Checkbox
         onPress={onChangeChecked}
         color={GlobalColor.main}
@@ -50,7 +50,7 @@ const ProductItemInCart = ({
           </TouchableOpacity>
         </View>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 const styles = StyleSheet.create({

@@ -1,12 +1,12 @@
 import React, {useContext, useEffect, useState} from 'react';
 
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import ProductItemInSearch from '../components/search/ProductItemInSearch';
 import SearchBar from '../components/search/SearchBar';
 import ProgressDialog from 'react-native-progress-dialog';
 
 import {ProductContext} from '../product/ProductContext';
-const SearchScreen = () => {
+const SearchScreen = ({navigation}) => {
   const [productsFilter, setProductsFilter] = useState([]);
   const [textSearch, setTextSearch] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -41,14 +41,19 @@ const SearchScreen = () => {
           data={productsFilter}
           renderItem={({item, index}) => {
             return (
-              <ProductItemInSearch
+              <TouchableOpacity
                 key={index}
-                name={item.name}
-                price={item.price}
-                quantity={item.quantity}
-                description={item.madein}
-                image={{uri: item.images[0]}}
-              />
+                onPress={() =>
+                  navigation.navigate('DetailsProduct', {productId: item._id})
+                }>
+                <ProductItemInSearch
+                  name={item.name}
+                  price={item.price}
+                  quantity={item.quantity}
+                  description={item.madein}
+                  image={{uri: item.images[0]}}
+                />
+              </TouchableOpacity>
             );
           }}
         />
