@@ -46,17 +46,22 @@ const CartScreen = ({navigation}) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const handleClearCart = () => {
     setCart([]);
-    setData([]);
   };
+  console.log('re-render');
   useEffect(() => {
-    let total = data.reduce((accumulator, product) => {
-      // select product checked
-      if (product.checked) {
-        return accumulator + product.quantity * product.price;
-      }
-      return accumulator;
-    }, 0);
-    setTotalPrice(total);
+    setData(cart);
+  }, [cart]);
+  useEffect(() => {
+    if (data && data.length > 0) {
+      let total = data.reduce((accumulator, product) => {
+        // select product checked
+        if (product.checked) {
+          return accumulator + product.quantity * product.price;
+        }
+        return accumulator;
+      }, 0);
+      setTotalPrice(total);
+    }
   }, [data]);
   const handleDeleteAll = () => {
     Alert.alert('Xác nhận', 'Xoá tất cả trong giỏ hàng ?', [
@@ -94,6 +99,7 @@ const CartScreen = ({navigation}) => {
           renderItem={({item}) => {
             return (
               <TouchableOpacity
+                key={item._id}
                 onPress={() =>
                   navigation.navigate('DetailsProduct', {
                     productId: item.product._id,
@@ -126,7 +132,9 @@ const CartScreen = ({navigation}) => {
           </View>
 
           <TouchableOpacity
-            onPress={() => navigation.navigate('Payment')}
+            onPress={() =>
+              navigation.navigate('Payment', {totalPriceCart: totalPrice})
+            }
             style={styles.totalButton}>
             <Text style={styles.textTotalButton}>Tiến thành thanh toán</Text>
             <Icon

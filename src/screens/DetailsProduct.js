@@ -54,10 +54,10 @@ const DetailsProduct = ({route, navigation}) => {
     navigation.navigate('Cart');
   };
   const handleUpdateCart = () => {
-    const check = cart.filter(item => item.product._id == product._id);
+    const check = cart.filter(item => item.product._id === product._id);
     let temp = cart;
 
-    if (check.length == 0) {
+    if (check.length === 0) {
       // ko có sản phẩm trong giỏ hàng
       temp.push({
         product: product,

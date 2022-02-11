@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 
 import {
   View,
@@ -12,11 +12,19 @@ import {ColorsGlobal} from '../assets/ColorsGlobal';
 import Icon, {Icons} from '../assets/Icons';
 import MyButton from '../components/common/MyButton';
 import Text from '../assets/TextMy';
-const PaymentScreen = ({navigation}) => {
+import {formatter} from '../utils/formatCurrency';
+import {ProductContext} from '../product/ProductContext';
+const PaymentScreen = ({navigation, route}) => {
+  const {totalPriceCart} = route.params;
   const [modalVisible, setModalVisible] = useState(false);
+  const [shippingFee, setShippingFee] = useState(15000);
+  const [totoal, setTotoal] = useState(totalPriceCart + shippingFee);
+  const {setCart} = useContext(ProductContext);
   const handleOrder = () => {
     setModalVisible(!modalVisible);
     navigation.navigate('OrderSuccess');
+    //clear cart
+    setCart([]);
   };
   return (
     <View style={styles.container}>
@@ -68,15 +76,15 @@ const PaymentScreen = ({navigation}) => {
       <View style={styles.sectionBottom}>
         <View style={styles.viewRow}>
           <Text style={styles.text}>Tạm tính</Text>
-          <Text style={styles.text}>500.00d</Text>
+          <Text style={styles.text}>{`${totalPriceCart}d`}</Text>
         </View>
         <View style={styles.viewRow}>
           <Text style={styles.text}>Phí vận chuyển</Text>
-          <Text style={styles.text}>15.00d</Text>
+          <Text style={styles.text}>{`${shippingFee}d`}</Text>
         </View>
         <View style={styles.viewRow}>
           <Text style={[styles.text2]}>Tổng cộng</Text>
-          <Text style={[styles.textPrimary, styles.text2]}>515.00d</Text>
+          <Text style={[styles.textPrimary, styles.text2]}>{`${totoal}d`}</Text>
         </View>
         <MyButton
           onPress={() => setModalVisible(true)}

@@ -1,6 +1,6 @@
 import React, {memo} from 'react';
 
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Dimensions} from 'react-native';
 import {ImageSlider} from 'react-native-image-slider-banner';
 const MySlide = ({images1, images2}) => {
   return (
@@ -18,7 +18,6 @@ const MySlide = ({images1, images2}) => {
           },
         ]}
         autoPlay={false}
-        onItemChanged={item => console.log('item', item)}
         closeIconColor="#fff"
       />
     </View>
@@ -28,7 +27,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     width: '100%',
-    height: 270,
+    height: (Dimensions.get('window').height * 35) / 100, // height: 35%
   },
 });
 export default memo(MySlide);
