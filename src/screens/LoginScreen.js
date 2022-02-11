@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -14,6 +14,7 @@ import MyButton from '../components/common/MyButton';
 import Icon from 'react-native-vector-icons/Entypo';
 import MyBackground from '../components/userScreen/MyBackground';
 import {UserContext} from '../user/UserContext';
+import PushNotification from 'react-native-push-notification';
 
 const LoginScreen = ({navigation}) => {
   const [isSecure, setIsSecure] = useState(true);

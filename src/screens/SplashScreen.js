@@ -1,9 +1,17 @@
 import React, {useEffect} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import PushNotification from 'react-native-push-notification';
 
 const SplashScreen = ({navigation}) => {
+  const createChannels = () => {
+    PushNotification.createChannel({
+      channelId: 'orders-channel',
+      channelName: 'Orders Channel',
+    });
+  };
   useEffect(() => {
+    createChannels();
     const isLogin = async () => {
       try {
         const jsonValue = await AsyncStorage.getItem('isLogin');

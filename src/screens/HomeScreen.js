@@ -15,6 +15,7 @@ import ListProduct from '../components/home/ListProduct';
 import {ProductContext} from '../product/ProductContext';
 import ProgressDialog from 'react-native-progress-dialog';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import PushNotification from 'react-native-push-notification';
 
 const HomeScreen = ({navigation}) => {
   const SectionHeader = () => {

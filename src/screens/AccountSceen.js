@@ -12,6 +12,7 @@ import {
 import {ColorsGlobal} from '../assets/ColorsGlobal';
 import Line from '../components/common/Line';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import PushNotification from 'react-native-push-notification';
 
 const AccountScreen = ({navigation}) => {
   const handleUpdateInfo = () => {
