@@ -12,19 +12,41 @@ import {ColorsGlobal} from '../assets/ColorsGlobal';
 import Icon, {Icons} from '../assets/Icons';
 import MyButton from '../components/common/MyButton';
 import Text from '../assets/TextMy';
-import {formatter} from '../utils/formatCurrency';
 import {ProductContext} from '../product/ProductContext';
 const PaymentScreen = ({navigation, route}) => {
   const {totalPriceCart} = route.params;
   const [modalVisible, setModalVisible] = useState(false);
   const [shippingFee, setShippingFee] = useState(15000);
   const [totoal, setTotoal] = useState(totalPriceCart + shippingFee);
-  const {setCart} = useContext(ProductContext);
+  const {cart, setCart, onSaveCart} = useContext(ProductContext);
   const handleOrder = () => {
     setModalVisible(!modalVisible);
     navigation.navigate('OrderSuccess');
-    //clear cart
-    setCart([]);
+    handleSaveCart();
+  };
+  const handleSaveCart = async () => {
+    let total = cart.reduce((accumulator, product) => {
+      // select product checked
+      if (product.checked) {
+        return accumulator + product.quantity * product.price;
+      }
+      return accumulator;
+    }, 0);
+    //select product checked
+    let products = cart.map(item => {
+      if (item.checked) {
+        return {
+          product: item.product._id,
+          quantity: item.quantity,
+          price: item.price,
+        };
+      }
+    });
+    // post to server
+    await onSaveCart({total: total, products: products});
+    // clear item ordered
+    const newCart = cart.filter(item => !item.checked);
+    setCart(newCart);
   };
   return (
     <View style={styles.container}>

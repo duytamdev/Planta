@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
-import {createContext} from 'react';
+import React, {createContext, useState} from 'react';
 import {
   getDetailInfoProduct,
   getProductByCategoryAndType,
   getProductByName,
   getProductForHome,
   getProductInCartHistory,
+  saveCartToDatabase,
 } from './ProductService';
 
 const ProductContext = createContext();
@@ -66,6 +66,15 @@ const ProductProvider = ({children}) => {
     }
     return null;
   };
+  const onSaveCart = async cart => {
+    try {
+      const res =await saveCartToDatabase(cart);
+      return res;
+    } catch (e) {
+      console.log(e);
+    }
+    return [];
+  };
   return (
     <ProductContext.Provider
       value={{
@@ -74,6 +83,7 @@ const ProductProvider = ({children}) => {
         onGetProductByName,
         onGetProductByCategoryAndType,
         onGetDetailInfoProduct,
+        onSaveCart,
         cart,
         setCart,
       }}>

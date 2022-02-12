@@ -23,7 +23,7 @@ const DetailsInfoProduct = ({product}) => {
         </View>
         <View style={styles.viewInfo}>
           <Text style={styles.text}>Tình Trạng</Text>
-          <Text style={styles.text}>{`Còn ${product.quantity} sản phẩm`}</Text>
+          <Text numberOfLines={1} style={styles.text}>{`Còn ${product.quantity} sản phẩm`}</Text>
         </View>
       </View>
     </View>

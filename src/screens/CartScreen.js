@@ -6,11 +6,15 @@ import {
   TouchableOpacity,
   FlatList,
   Alert,
+  ToastAndroid,
 } from 'react-native';
 import Text from '../assets/TextMy';
 import ProductItemInCart from '../components/cart/ProductItemInCart';
 import Icon, {Icons} from '../assets/Icons';
-import {ColorsGlobal} from '../assets/ColorsGlobal';
+import {
+  ColorsGlobal as GlobalColor,
+  ColorsGlobal,
+} from '../assets/ColorsGlobal';
 import {ProductContext} from '../product/ProductContext';
 
 const Header = ({onBack, isShowRight, onClickDeleteAll}) => {
@@ -42,18 +46,18 @@ const Header = ({onBack, isShowRight, onClickDeleteAll}) => {
 };
 const CartScreen = ({navigation}) => {
   const {cart, setCart} = useContext(ProductContext);
-  const [data, setData] = useState(cart);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [refreshing, setRefreshing] = useState(false);
+  const reloadData = () => {
+    setRefreshing(true);
+    setRefreshing(false);
+  };
   const handleClearCart = () => {
     setCart([]);
   };
-  console.log('re-render');
   useEffect(() => {
-    setData(cart);
-  }, [cart]);
-  useEffect(() => {
-    if (data && data.length > 0) {
-      let total = data.reduce((accumulator, product) => {
+    if (cart && cart.length > 0) {
+      let total = cart.reduce((accumulator, product) => {
         // select product checked
         if (product.checked) {
           return accumulator + product.quantity * product.price;
@@ -62,7 +66,7 @@ const CartScreen = ({navigation}) => {
       }, 0);
       setTotalPrice(total);
     }
-  }, [data]);
+  }, [cart]);
   const handleDeleteAll = () => {
     Alert.alert('Xác nhận', 'Xoá tất cả trong giỏ hàng ?', [
       {
@@ -72,30 +76,75 @@ const CartScreen = ({navigation}) => {
       {text: 'Xoá', onPress: handleClearCart},
     ]);
   };
+  const handleDeleteItem = itemID => {
+    Alert.alert('Xác nhận', 'Xoá khỏi giỏ hàng ?', [
+      {
+        text: 'Huỷ',
+        style: 'cancel',
+      },
+      {
+        text: 'Xoá',
+        onPress: () => {
+          const newData = cart.filter(item => item.product._id !== itemID);
+          setCart(newData);
+        },
+      },
+    ]);
+  };
+  const handleUpdateQuantity = (idItem, isAdd) => {
+    const newData = cart.map(item => {
+      if (item.product._id === idItem) {
+        if (item.quantity <= 1 && isAdd === false) {
+          return {
+            ...item,
+          };
+        }
+        return {
+          ...item,
+          quantity: isAdd ? item.quantity + 1 : item.quantity - 1,
+        };
+      }
+      return {
+        ...item,
+      };
+    });
+    setCart(newData);
+  };
   const handleCheckedItem = idItem => {
-    // const test = data.map(item => {
-    //   if (item.product._id === idItem) {
-    //     return {
-    //       ...item,
-    //       checked: !item.checked,
-    //     };
-    //   }
-    // });
-    // console.log(test);
+    const newData = cart.map(item => {
+      if (item.product._id === idItem) {
+        return {
+          ...item,
+          checked: !item.checked,
+        };
+      }
+      return {
+        ...item,
+      };
+    });
+    setCart(newData);
+  };
+  const handleToPayment = () => {
+    navigation.navigate('Payment', {totalPriceCart: totalPrice});
+  };
+  const toastWhenEmptyCart = () => {
+    ToastAndroid.show('Hãy tích vào những sản phẩm bạn muốn mua!',2000);
   };
   return (
     <View style={styles.container}>
       <Header
         onClickDeleteAll={handleDeleteAll}
-        isShowRight={data.length > 0}
+        isShowRight={cart.length > 0}
         onBack={() => navigation.goBack()}
       />
-      {data.length > 0 ? (
+      {cart.length > 0 ? (
         <FlatList
+          onRefresh={reloadData}
+          refreshing={refreshing}
           style={styles.flatList}
           showsVerticalScrollIndicator={false}
           keyExtractor={item => item._id}
-          data={data}
+          data={cart}
           renderItem={({item}) => {
             return (
               <TouchableOpacity
@@ -106,6 +155,13 @@ const CartScreen = ({navigation}) => {
                   })
                 }>
                 <ProductItemInCart
+                  onAddQuantity={() =>
+                    handleUpdateQuantity(item.product._id, true)
+                  }
+                  onMinusQuantity={() =>
+                    handleUpdateQuantity(item.product._id, false)
+                  }
+                  onRemove={() => handleDeleteItem(item.product._id)}
                   onChangeChecked={() => handleCheckedItem(item.product._id)}
                   checked={item.checked}
                   price={item.price}
@@ -124,7 +180,7 @@ const CartScreen = ({navigation}) => {
           <Text style={styles.text}>Giỏ hàng của bạn hiện đang trống!</Text>
         </View>
       )}
-      {data.length > 0 && (
+      {cart.length > 0 && (
         <View style={styles.totalContainer}>
           <View style={styles.totalView}>
             <Text>Tạm tính</Text>
@@ -132,10 +188,11 @@ const CartScreen = ({navigation}) => {
           </View>
 
           <TouchableOpacity
-            onPress={() =>
-              navigation.navigate('Payment', {totalPriceCart: totalPrice})
-            }
-            style={styles.totalButton}>
+            onPress={totalPrice > 0 ? handleToPayment : toastWhenEmptyCart}
+            style={[
+              styles.totalButton,
+              {backgroundColor: totalPrice <= 0 ? '#ABABAB' : GlobalColor.main},
+            ]}>
             <Text style={styles.textTotalButton}>Tiến thành thanh toán</Text>
             <Icon
               type={Icons.AntDesign}

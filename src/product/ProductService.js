@@ -22,3 +22,6 @@ export const getProductByCategoryAndType = async (categoryToken, type) => {
     `/api/products/search-by-category-and-type?category=${categoryToken}&type=${type}`,
   );
 };
+export const saveCartToDatabase = async cart => {
+  return await axiosInstance.post('/api/carts', cart);
+};

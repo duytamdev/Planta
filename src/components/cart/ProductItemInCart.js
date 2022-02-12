@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { View, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {Checkbox} from 'react-native-paper';
 import {ColorsGlobal as GlobalColor} from '../../assets/ColorsGlobal';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
@@ -15,16 +15,10 @@ const ProductItemInCart = ({
   checked,
   quantity,
   onChangeChecked,
+  onRemove,
+  onAddQuantity,
+    onMinusQuantity,
 }) => {
-  // const handleChangeQuantity = isAdd => {
-  //   if (isAdd) {
-  //     setQuantity(quantity + 1);
-  //   } else {
-  //     if (quantity > 0) {
-  //       setQuantity(quantity - 1);
-  //     }
-  //   }
-  // };
   return (
     <View style={[styles.container, style]}>
       <Checkbox
@@ -40,14 +34,16 @@ const ProductItemInCart = ({
         </View>
         <Text style={styles.price}>{`${price}đ`}</Text>
         <View style={styles.quantityContainer}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={onMinusQuantity}>
             <AntDesignIcon name={'minussquareo'} size={24} color={'#000'} />
           </TouchableOpacity>
           <Text style={styles.quantity}>{quantity}</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={onAddQuantity}>
             <AntDesignIcon name={'plussquareo'} size={24} color={'#000'} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.removeTextContainer}>
+          <TouchableOpacity
+            onPress={onRemove}
+            style={styles.removeTextContainer}>
             <Text style={styles.removeText}>Xoá</Text>
           </TouchableOpacity>
         </View>
