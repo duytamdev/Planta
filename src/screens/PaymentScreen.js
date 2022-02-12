@@ -43,7 +43,8 @@ const PaymentScreen = ({navigation, route}) => {
       }
     });
     // post to server
-    await onSaveCart({total: total, products: products});
+   const res= await onSaveCart({total: total, products: products});
+   console.log(res);
     // clear item ordered
     const newCart = cart.filter(item => !item.checked);
     setCart(newCart);

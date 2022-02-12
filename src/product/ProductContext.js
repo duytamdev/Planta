@@ -66,14 +66,17 @@ const ProductProvider = ({children}) => {
     }
     return null;
   };
-  const onSaveCart = async cart => {
+  const onSaveCart = async carts => {
     try {
-      const res =await saveCartToDatabase(cart);
+      const res = await saveCartToDatabase(carts);
+      if (res.error === false) {
+        return true;
+      }
       return res;
     } catch (e) {
       console.log(e);
     }
-    return [];
+    return false;
   };
   return (
     <ProductContext.Provider

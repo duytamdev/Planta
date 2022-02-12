@@ -28,7 +28,7 @@ const displayTime = time => {
   const day = displayDay(time.getDay());
   const date = time.getDate() < 10 ? '0' + time.getDate() : time.getDate();
   const month =
-    time.getMonth() + 1 < 10 ? '0' + time.getMonth() + 1 : time.getMonth() + 1;
+    time.getMonth() + 1 < 10 ? '' + time.getMonth() + 1 : time.getMonth() + 1;
   const year = time.getFullYear();
   return `${day} ${date}/${month}/${year}`;
 };
