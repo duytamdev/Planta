@@ -3,6 +3,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {View, StyleSheet, Dimensions, FlatList} from 'react-native';
 import CartHistoryItem from '../components/cart/CartHistoryItem';
 import {ProductContext} from '../product/ProductContext';
+import ProgressDialog from 'react-native-progress-dialog';
 const displayDay = day => {
   switch (day) {
     case 0:
@@ -43,6 +44,9 @@ const CartHistoryScreen = () => {
     };
     fetchData();
   }, []);
+  if (!data.length>0) {
+    return <ProgressDialog visible={true} />;
+  }
   return (
     <View style={styles.container}>
       <FlatList

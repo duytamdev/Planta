@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 
 import {
   Image,
@@ -12,9 +12,21 @@ import {ColorsGlobal} from '../assets/ColorsGlobal';
 import Line from '../components/common/Line';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Text from '../assets/TextMy';
-
-
 const AccountScreen = ({navigation}) => {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await AsyncStorage.getItem('dataUser', (err, value) => {
+        if (err) {
+          console.log(err);
+        } else {
+          setData(JSON.parse(value));
+        }
+      });
+    };
+    fetchData();
+  }, []);
   const handleUpdateInfo = () => {
     navigation.navigate('UpdateInfo');
   };
@@ -42,11 +54,13 @@ const AccountScreen = ({navigation}) => {
         <TouchableOpacity style={styles.sectionProfileContainer}>
           <Image
             style={styles.image}
-            source={require('../assets/images/avt.png')}
+            source={
+              data ? {uri: data.avatar} : require('../assets/images/avt.png')
+            }
           />
           <View styles={styles.sectionProfile}>
-            <Text style={styles.text}>NGUYỄN DUY TÂM</Text>
-            <Text style={styles.textEmail}>tamduynguyen0819@gmail.com</Text>
+            <Text style={styles.text}>{data && data.name}</Text>
+            <Text style={styles.textEmail}>{data && data.email}</Text>
           </View>
         </TouchableOpacity>
         <View style={styles.sectionContainer}>
