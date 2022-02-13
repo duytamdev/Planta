@@ -41,7 +41,6 @@ const DetailsProduct = ({route, navigation}) => {
       if (quantity >= 1) {
         setQuantity(pre => {
           setSumPrice(product.price * (pre - 1));
-
           return pre - 1;
         });
       }

@@ -14,9 +14,9 @@ import {UserContext} from '../user/UserContext';
 import Text from '../assets/TextMy';
 const RegisterScreen = ({navigation}) => {
   const [isSecure, setIsSecure] = useState(true);
-  const [email, setEmail] = useState('duytam@gmail.com');
-  const [password, setPassword] = useState('123456');
-  const [passwordConfirm, setPasswordConfirm] = useState('123456');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
   const {onRegister} = useContext(UserContext);
   const handleRegister = async () => {
     if (passwordConfirm.trim() === password.trim()) {
@@ -24,7 +24,7 @@ const RegisterScreen = ({navigation}) => {
       if (res === false) {
         ToastAndroid.show('Đăng kí không thành công!', 2000);
       } else {
-        ToastAndroid.show('Đăng kí  thành công!', 2000);
+        ToastAndroid.show('Đăng kí thành công!', 2000);
         navigation.goBack();
       }
     } else {

@@ -51,18 +51,25 @@ const AccountScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <TouchableOpacity style={styles.sectionProfileContainer}>
-          <Image
-            style={styles.image}
-            source={
-              data ? {uri: data.avatar} : require('../assets/images/avt.png')
-            }
-          />
-          <View styles={styles.sectionProfile}>
-            <Text style={styles.text}>{data && data.name}</Text>
-            <Text style={styles.textEmail}>{data && data.email}</Text>
-          </View>
-        </TouchableOpacity>
+        {data && (
+          <TouchableOpacity style={styles.sectionProfileContainer}>
+            <Image
+              style={styles.image}
+              source={
+                data.avatar
+                  ? {uri: data.avatar}
+                  : require('../assets/images/avt.png')
+              }
+            />
+            <View styles={styles.sectionProfile}>
+              <Text style={styles.text}>
+                {data.name ? data.name : 'Please update your name'}
+              </Text>
+              <Text style={styles.textEmail}>{data && data.email}</Text>
+            </View>
+          </TouchableOpacity>
+        )}
+
         <View style={styles.sectionContainer}>
           <View>
             <Text style={styles.textSectionHeader}>Chung</Text>

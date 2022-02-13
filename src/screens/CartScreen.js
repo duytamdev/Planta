@@ -11,6 +11,8 @@ import {
 import Text from '../assets/TextMy';
 import ProductItemInCart from '../components/cart/ProductItemInCart';
 import Icon, {Icons} from '../assets/Icons';
+import {Checkbox} from 'react-native-paper';
+
 import {
   ColorsGlobal as GlobalColor,
   ColorsGlobal,
@@ -48,6 +50,7 @@ const CartScreen = ({navigation}) => {
   const {cart, setCart} = useContext(ProductContext);
   const [totalPrice, setTotalPrice] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
+  const [checkedAll, setCheckedAll] = useState(false);
   const reloadData = () => {
     setRefreshing(true);
     setRefreshing(false);
@@ -131,8 +134,23 @@ const CartScreen = ({navigation}) => {
     });
     setCart(newData);
   };
+  const checkedAllItems = isChecked => {
+    const newData = cart.map(item => {
+      return {
+        ...item,
+        checked: isChecked,
+      };
+    });
+    setCart(newData);
+  };
   const handleToPayment = () => {
     navigation.navigate('Payment', {totalPriceCart: totalPrice});
+  };
+  const handleCheckedAll = () => {
+    setCheckedAll(value => {
+      checkedAllItems(!value);
+      return !value;
+    });
   };
   const toastWhenEmptyCart = () => {
     ToastAndroid.show('Hãy tích vào những sản phẩm bạn muốn mua!', 2000);
@@ -144,6 +162,17 @@ const CartScreen = ({navigation}) => {
         isShowRight={cart.length > 0}
         onBack={() => navigation.goBack()}
       />
+      {cart.length > 0 ? (
+        <View style={styles.sectionSelector}>
+          <Checkbox
+            onPress={handleCheckedAll}
+            status={checkedAll ? 'checked' : 'unchecked'}
+          />
+          <Text onPress={handleCheckedAll} style={styles.textSelect}>
+            Select all
+          </Text>
+        </View>
+      ) : null}
       {cart.length > 0 ? (
         <FlatList
           onRefresh={reloadData}
@@ -214,6 +243,15 @@ const CartScreen = ({navigation}) => {
   );
 };
 const styles = StyleSheet.create({
+  textSelect: {
+    textDecorationLine: 'underline',
+    color: GlobalColor.main,
+    fontSize: 22,
+  },
+  sectionSelector: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   totalPrice: {
     fontSize: 22,
     color: ColorsGlobal.main,

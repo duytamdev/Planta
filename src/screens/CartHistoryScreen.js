@@ -4,6 +4,7 @@ import {View, StyleSheet, Dimensions, FlatList} from 'react-native';
 import CartHistoryItem from '../components/cart/CartHistoryItem';
 import {ProductContext} from '../product/ProductContext';
 import ProgressDialog from 'react-native-progress-dialog';
+import Text from '../assets/TextMy';
 const displayDay = day => {
   switch (day) {
     case 0:
@@ -29,7 +30,9 @@ const displayTime = time => {
   const day = displayDay(time.getDay());
   const date = time.getDate() < 10 ? '0' + time.getDate() : time.getDate();
   const month =
-    time.getMonth() + 1 < 10 ? '' + time.getMonth() + 1 : time.getMonth() + 1;
+    time.getMonth() + 1 < 10
+      ? '0' + (time.getMonth() + 1)
+      : time.getMonth() + 1;
   const year = time.getFullYear();
   return `${day} ${date}/${month}/${year}`;
 };
@@ -44,25 +47,29 @@ const CartHistoryScreen = () => {
     };
     fetchData();
   }, []);
-  if (!data.length>0) {
+  if (!data) {
     return <ProgressDialog visible={true} />;
   }
   return (
     <View style={styles.container}>
-      <FlatList
-        data={data}
-        renderItem={({item, index}) => {
-          return (
-            <CartHistoryItem
-              total={item.total}
-              status={item.status}
-              quantity={item.products.length}
-              date={displayTime(item.createdAt)}
-              style={styles.item}
-            />
-          );
-        }}
-      />
+      {data.length > 0 ? (
+        <FlatList
+          data={data}
+          renderItem={({item, index}) => {
+            return (
+              <CartHistoryItem
+                total={item.total}
+                status={item.status}
+                quantity={item.products.length}
+                date={displayTime(item.createdAt)}
+                style={styles.item}
+              />
+            );
+          }}
+        />
+      ) : (
+        <Text style={styles.text}>Bạn chưa mua gì cả!, Order now</Text>
+      )}
     </View>
   );
 };
@@ -70,11 +77,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: '#fff',
   },
   item: {
     width: Dimensions.get('window').width - 96,
     marginTop: 32,
+  },
+  text: {
+    fontSize: 18,
   },
 });
 export default CartHistoryScreen;
