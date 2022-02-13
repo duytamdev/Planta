@@ -94,7 +94,14 @@ const CartScreen = ({navigation}) => {
   const handleUpdateQuantity = (idItem, isAdd) => {
     const newData = cart.map(item => {
       if (item.product._id === idItem) {
+        // min quantity order = 1
         if (item.quantity <= 1 && isAdd === false) {
+          return {
+            ...item,
+          };
+        }
+        // max quantity order =5
+        if (item.quantity >= 5 && isAdd === true) {
           return {
             ...item,
           };
@@ -128,7 +135,7 @@ const CartScreen = ({navigation}) => {
     navigation.navigate('Payment', {totalPriceCart: totalPrice});
   };
   const toastWhenEmptyCart = () => {
-    ToastAndroid.show('Hãy tích vào những sản phẩm bạn muốn mua!',2000);
+    ToastAndroid.show('Hãy tích vào những sản phẩm bạn muốn mua!', 2000);
   };
   return (
     <View style={styles.container}>

@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 
 import {
   View,
@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Modal,
   Dimensions,
+  ToastAndroid,
 } from 'react-native';
 import MyInput from '../components/common/MyInput';
 import {ColorsGlobal} from '../assets/ColorsGlobal';
@@ -13,12 +14,40 @@ import Icon, {Icons} from '../assets/Icons';
 import MyButton from '../components/common/MyButton';
 import Text from '../assets/TextMy';
 import {ProductContext} from '../product/ProductContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+const displayTime = () => {
+  const time = new Date(Date.now());
+  const date = time.getDate() < 10 ? '0' + time.getDate() : time.getDate();
+  const month =
+    time.getMonth() + 1 < 10 ? '' + time.getMonth() + 1 : time.getMonth() + 1;
+  return `${date}-${date + 4}/${month}`;
+};
 const PaymentScreen = ({navigation, route}) => {
   const {totalPriceCart} = route.params;
+  const shippingFee = 15000;
+  const total = totalPriceCart + shippingFee;
   const [modalVisible, setModalVisible] = useState(false);
-  const [shippingFee, setShippingFee] = useState(15000);
-  const [totoal, setTotoal] = useState(totalPriceCart + shippingFee);
   const {cart, setCart, onSaveCart} = useContext(ProductContext);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [address, setAddress] = useState('');
+  const [phone, setPhone] = useState('');
+  useEffect(() => {
+    const fetchData = async () => {
+      await AsyncStorage.getItem('dataUser', (err, value) => {
+        if (err) {
+          console.log(err);
+        } else {
+          const data = JSON.parse(value);
+          setName(data.name);
+          setAddress(data.address);
+          setEmail(data.email);
+          setPhone(data.phone);
+        }
+      });
+    };
+    fetchData();
+  }, []);
   const handleOrder = () => {
     setModalVisible(!modalVisible);
     navigation.navigate('OrderSuccess');
@@ -43,8 +72,8 @@ const PaymentScreen = ({navigation, route}) => {
       }
     });
     // post to server
-   const res= await onSaveCart({total: total, products: products});
-   console.log(res);
+    const res = await onSaveCart({total: total, products: products});
+    console.log(res);
     // clear item ordered
     const newCart = cart.filter(item => !item.checked);
     setCart(newCart);
@@ -55,23 +84,41 @@ const PaymentScreen = ({navigation, route}) => {
         <Text style={styles.textHeader}>Thông tin khách hàng</Text>
         <MyInput
           styleInput={styles.textInputBlur}
-          value={'Nguyễn Duy Tâm'}
+          value={name}
+          onChangeText={value => setName(value)}
           placeholder="Họ và tên"
         />
         <MyInput
           styleInput={styles.textInputBlur}
-          value={'tamduynguyen0819@gmail.com'}
+          value={email}
+          onChangeText={() =>
+            ToastAndroid.show('Bạn không thể thay đổi email', 2000)
+          }
           placeholder="Email"
         />
-        <MyInput placeholder="Địa chỉ" />
-        <MyInput placeholder="Số điện thoại" />
+        <MyInput
+          styleInput={styles.textInputBlur}
+          value={address}
+          onChangeText={value => setAddress(value)}
+          placeholder="Địa chỉ"
+        />
+        <MyInput
+          maxLength={10}
+          keyboardType="numeric"
+          styleInput={styles.textInputBlur}
+          value={phone}
+          onChangeText={value => setPhone(value)}
+          placeholder="Số điện thoại"
+        />
       </View>
       <View style={styles.sectionContainer}>
         <Text style={styles.textHeader}>Phương thức vận chuyển</Text>
         <TouchableOpacity style={[styles.formMoveContainer, styles.lineBottom]}>
           <View>
             <Text style={styles.textPrimary}>Giao hàng nhanh - 15.000đ</Text>
-            <Text style={styles.text}>Dự kiến giao hàng 4-8/09</Text>
+            <Text style={styles.text}>
+              {`Dự kiến giao hàng ${displayTime()}`}{' '}
+            </Text>
           </View>
           <Icon
             type={Icons.Feather}
@@ -83,7 +130,7 @@ const PaymentScreen = ({navigation, route}) => {
       </View>
       <View style={styles.sectionContainer}>
         <Text style={styles.textHeader}>Hình thức thanh toán</Text>
-        <View style={[styles.formMoveContainer, styles.lineBottom]}>
+        <TouchableOpacity style={[styles.formMoveContainer, styles.lineBottom]}>
           <Text style={styles.textPrimary}>Thanh toán khi nhận hàng - COD</Text>
           <Icon
             type={Icons.Feather}
@@ -91,10 +138,14 @@ const PaymentScreen = ({navigation, route}) => {
             size={24}
             color={ColorsGlobal.main}
           />
-        </View>
-        <View style={[styles.formMoveContainer, styles.lineBottom]}>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            ToastAndroid.show('Tính năng đang được phát triển', 2000)
+          }
+          style={[styles.formMoveContainer, styles.lineBottom]}>
           <Text style={styles.text}>Thẻ VISA/MASTERCARD</Text>
-        </View>
+        </TouchableOpacity>
       </View>
       <View style={styles.sectionBottom}>
         <View style={styles.viewRow}>
@@ -107,7 +158,7 @@ const PaymentScreen = ({navigation, route}) => {
         </View>
         <View style={styles.viewRow}>
           <Text style={[styles.text2]}>Tổng cộng</Text>
-          <Text style={[styles.textPrimary, styles.text2]}>{`${totoal}d`}</Text>
+          <Text style={[styles.textPrimary, styles.text2]}>{`${total}d`}</Text>
         </View>
         <MyButton
           onPress={() => setModalVisible(true)}
