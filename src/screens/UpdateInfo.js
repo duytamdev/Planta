@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import ProgressDialog from 'react-native-progress-dialog';
 const avt = 'https://2.pik.vn/20228e132485-e812-4825-8ae5-34506c84acbe.jpg';
 const dob = '2002-08-19';
-const UpDateInfo = () => {
+const UpDateInfo = ({navigation}) => {
   const {onUpdateInfo} = useContext(UserContext);
   const [dataUser, setDataUser] = useState(null);
 
@@ -39,6 +39,7 @@ const UpDateInfo = () => {
       res === true ? 'Cập nhật thành công!' : 'Cập nhật không thành công',
       2000,
     );
+    navigation.goBack();
   };
   if (dataUser == null) {
     return <ProgressDialog visible={true} />;

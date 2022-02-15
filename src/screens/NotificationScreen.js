@@ -4,7 +4,7 @@ import {View, StyleSheet, FlatList} from 'react-native';
 import ProductItemNotification from '../components/notification/ProductItemNotification';
 
 const NotificationScreen = () => {
-  const [notfications, setNotfications] = useState([
+  const [notifications, setNotifications] = useState([
     {
       date: 'Thứ 4, 27/04/2022',
       status: 'Đặt hàng thành công',
@@ -40,7 +40,7 @@ const NotificationScreen = () => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={notfications}
+        data={notifications}
         renderItem={({item, index}) => {
           return (
             <ProductItemNotification

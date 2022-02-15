@@ -35,7 +35,9 @@ const UserProvider = ({children}) => {
   const onUpdateInfo = async (name, address, phone, avt, dob) => {
     try {
       const res = await updateInfo(name, address, phone, avt, dob);
+      console.log(res);
       if (res.error === false) {
+        await AsyncStorage.setItem('dataUser', JSON.stringify(res.data));
         return true;
       }
     } catch (e) {

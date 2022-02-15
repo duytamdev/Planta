@@ -14,7 +14,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Text from '../assets/TextMy';
 const AccountScreen = ({navigation}) => {
   const [data, setData] = useState(null);
-
+  // const componentDidMount = () => {
+  //   navigation.addListener('didFocus', payload => {
+  //     this.forceUpdate();
+  //   });
+  // };
   useEffect(() => {
     const fetchData = async () => {
       await AsyncStorage.getItem('dataUser', (err, value) => {
@@ -27,6 +31,23 @@ const AccountScreen = ({navigation}) => {
     };
     fetchData();
   }, []);
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      // do something
+      const fetchData = async () => {
+        await AsyncStorage.getItem('dataUser', (err, value) => {
+          if (err) {
+            console.log(err);
+          } else {
+            setData(JSON.parse(value));
+          }
+        });
+      };
+      fetchData();
+    });
+
+    return unsubscribe;
+  },[navigation])
   const handleUpdateInfo = () => {
     navigation.navigate('UpdateInfo');
   };
