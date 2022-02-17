@@ -7,7 +7,7 @@ import NotificationScreen from '../screens/NotificationScreen';
 import AccountScreen from '../screens/AccountSceen';
 import * as Animatable from 'react-native-animatable';
 import {TouchableOpacity, StyleSheet} from 'react-native';
-import Icon, {Icons} from '../assets/Icons';
+import MyIcon, {MyIcons} from '../assets/MyIcons';
 
 const TabButton = props => {
   const {children, onPress, accessibilityState} = props;
@@ -66,8 +66,8 @@ const BottomNavigation = () => {
             size = focused ? 25 : 20;
           }
           return (
-            <Icon
-              type={Icons.Feather}
+            <MyIcon
+              type={MyIcons.Feather}
               name={iconName}
               size={size}
               color={focused ? '#009245' : '#000'}

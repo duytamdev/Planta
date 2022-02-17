@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import MyInput from '../components/common/MyInput';
 import {ColorsGlobal} from '../assets/ColorsGlobal';
-import Icon, {Icons} from '../assets/Icons';
+import MyIcon, {MyIcons} from '../assets/MyIcons';
 import MyButton from '../components/common/MyButton';
 import Text from '../assets/TextMy';
 import {ProductContext} from '../product/ProductContext';
@@ -120,8 +120,8 @@ const PaymentScreen = ({navigation, route}) => {
               {`Dự kiến giao hàng ${displayTime()}`}{' '}
             </Text>
           </View>
-          <Icon
-            type={Icons.Feather}
+          <MyIcon
+            type={MyIcons.Feather}
             name={'check'}
             size={24}
             color={ColorsGlobal.main}
@@ -132,8 +132,8 @@ const PaymentScreen = ({navigation, route}) => {
         <Text style={styles.textHeader}>Hình thức thanh toán</Text>
         <TouchableOpacity style={[styles.formMoveContainer, styles.lineBottom]}>
           <Text style={styles.textPrimary}>Thanh toán khi nhận hàng - COD</Text>
-          <Icon
-            type={Icons.Feather}
+          <MyIcon
+            type={MyIcons.Feather}
             name={'check'}
             size={24}
             color={ColorsGlobal.main}

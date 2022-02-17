@@ -14,8 +14,19 @@ import ListProduct from '../components/home/ListProduct';
 import {ProductContext} from '../product/ProductContext';
 import ProgressDialog from 'react-native-progress-dialog';
 import Text from '../assets/TextMy';
+import {Icon, withBadge} from 'react-native-elements';
 
 const HomeScreen = ({navigation}) => {
+  const {cart} = useContext(ProductContext);
+  const [quantityOfCart, setQuantityOfCart] = useState(0);
+  const BadgedIcon = withBadge(quantityOfCart)(Icon);
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      // do something
+      setQuantityOfCart(cart.length);
+    });
+    return unsubscribe;
+  },[navigation,cart])
   const SectionHeader = () => {
     return (
       <View>
@@ -24,7 +35,8 @@ const HomeScreen = ({navigation}) => {
             Planta - toả sáng {'\n'}không gian nhà bạn
           </Text>
           <TouchableOpacity onPress={handleToCart}>
-            <FeatherIcon name={'shopping-cart'} size={25} color={'#000'} />
+            <BadgedIcon size={36} type="ionicon" name="cart" />
+            {/*<FeatherIcon name={'shopping-cart'} size={25} color={'#000'} />*/}
           </TouchableOpacity>
         </View>
         <ImageBackground

@@ -14,11 +14,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Text from '../assets/TextMy';
 const AccountScreen = ({navigation}) => {
   const [data, setData] = useState(null);
-  // const componentDidMount = () => {
-  //   navigation.addListener('didFocus', payload => {
-  //     this.forceUpdate();
-  //   });
-  // };
   useEffect(() => {
     const fetchData = async () => {
       await AsyncStorage.getItem('dataUser', (err, value) => {

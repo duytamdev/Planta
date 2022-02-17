@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import Text from '../assets/TextMy';
 import ProductItemInCart from '../components/cart/ProductItemInCart';
-import Icon, {Icons} from '../assets/Icons';
+import MyIcon, {MyIcons} from '../assets/MyIcons';
 import {Checkbox} from 'react-native-paper';
 
 import {
@@ -23,8 +23,8 @@ const Header = ({onBack, isShowRight, onClickDeleteAll}) => {
   return (
     <View style={styles.header}>
       <TouchableOpacity onPress={onBack}>
-        <Icon
-          type={Icons.MaterialIcons}
+        <MyIcon
+          type={MyIcons.MaterialIcons}
           name={'arrow-back-ios'}
           color={'#000'}
           size={24}
@@ -34,8 +34,8 @@ const Header = ({onBack, isShowRight, onClickDeleteAll}) => {
       <View>
         {isShowRight ? (
           <TouchableOpacity onPress={onClickDeleteAll}>
-            <Icon
-              type={Icons.Feather}
+            <MyIcon
+              type={MyIcons.Feather}
               name={'trash-2'}
               color={'#000'}
               size={24}
@@ -230,8 +230,8 @@ const CartScreen = ({navigation}) => {
               {backgroundColor: totalPrice <= 0 ? '#ABABAB' : GlobalColor.main},
             ]}>
             <Text style={styles.textTotalButton}>Tiến thành thanh toán</Text>
-            <Icon
-              type={Icons.AntDesign}
+            <MyIcon
+              type={MyIcons.AntDesign}
               name={'arrowright'}
               color={'#fff'}
               size={24}

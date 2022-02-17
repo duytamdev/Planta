@@ -8,18 +8,22 @@ import {
   ToastAndroid,
 } from 'react-native';
 import Text from '../assets/TextMy';
-import Icon, {Icons} from '../assets/Icons';
+import MyIcon, {MyIcons} from '../assets/MyIcons';
 import MySlide from '../components/detailProduct/MySlider';
 import MyButton from '../components/common/MyButton';
 import DetailsInfoProduct from '../components/detailProduct/DetailsInfoProduct';
 import {ProductContext} from '../product/ProductContext';
 import ProgressDialog from 'react-native-progress-dialog';
+import {Icon, withBadge} from 'react-native-elements';
 
 const DetailsProduct = ({route, navigation}) => {
   const {productId} = route.params;
+  const [quantityOfCart, setQuantityOfCart] = useState(0);
   const [quantity, setQuantity] = useState(0);
   const [product, setProduct] = useState(null);
   const [sumPrice, setSumPrice] = useState(0);
+  const BadgedIcon = withBadge(quantityOfCart)(Icon);
+
   const {onGetDetailInfoProduct, cart, setCart} = useContext(ProductContext);
   useEffect(() => {
     const fetchData = async () => {
@@ -28,6 +32,14 @@ const DetailsProduct = ({route, navigation}) => {
     };
     fetchData();
   }, []);
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      // do something
+      setQuantityOfCart(cart.length);
+    });
+    return unsubscribe;
+  },[navigation,cart])
+
   if (!product) {
     return <ProgressDialog visible={true} />;
   }
@@ -74,6 +86,8 @@ const DetailsProduct = ({route, navigation}) => {
       });
     }
     setCart(temp);
+    setQuantityOfCart(cart.length);
+
     ToastAndroid.show('Đã thêm vào giỏ hàng', 2000);
   };
   return (
@@ -81,8 +95,8 @@ const DetailsProduct = ({route, navigation}) => {
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.headerContainer}>
           <TouchableOpacity onPress={handleBack}>
-            <Icon
-              type={Icons.MaterialIcons}
+            <MyIcon
+              type={MyIcons.MaterialIcons}
               name={'arrow-back-ios'}
               size={24}
               color={'#000'}
@@ -93,12 +107,7 @@ const DetailsProduct = ({route, navigation}) => {
             {product && product.name}
           </Text>
           <TouchableOpacity onPress={handleGoCart}>
-            <Icon
-              type={Icons.Ionicons}
-              name={'md-cart-outline'}
-              size={24}
-              color={'#000'}
-            />
+            <BadgedIcon size={36} type="fontAwesome" name="shopping-cart" />
           </TouchableOpacity>
         </View>
         {product && (
